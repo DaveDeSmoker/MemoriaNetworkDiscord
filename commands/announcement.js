@@ -37,7 +37,7 @@ module.exports.run = async(bot, message, args) => {
         var announcer = message.author;
 
         var announcementEmbed = new discord.RichEmbed()
-        .setTitle("Announcement")
+        .setTitle("ANNOUNCEMENT 🔔")
         .setColor(` ${options.kleur} `)
         .setDescription(`\n ${options.bericht} \n`)
         .setTimestamp()
