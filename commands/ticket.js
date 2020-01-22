@@ -3,7 +3,7 @@ const discord = require("discord.js");
 module.exports.run = async(bot, message, args) => {
     var botIcon = bot.user.displayAvatarURL;
 
-    const categoryid = "669255390139121664";
+    const categoryid = "604450345179021314";
 
     var userName = message.author.username;
     var userDiscriminator = message.author.discriminator;
