@@ -34,8 +34,12 @@ module.exports.run = async(bot, message, args) => {
 
         message.guild.createChannel(userName + "-" + userDiscriminator, "text").then((createdChan) => {
             createdChan.setParent(categoryid).then((settedParent) => {
-                settedParent.overwritePermissions(message.guild.roles.find('name', "@Member", "@Oud Staff", "@Server Donator", "@Nitro Booster"), { "READ_MESSAGES": false });
+                settedParent.overwritePermissions(message.guild.roles.find('name', "@everyone"), { "READ_MESSAGES": false });
                 settedParent.overwritePermissions(message.author, {
+                    "READ_MESSAGES": true, "SEND_MESSAGES": true,
+                    "ATTACH_FILES": true, "CONNECT": true,
+                    "CREATE_INSTANT_INVITE": false 
+                settedParent.overwritePermissions('name', "@support", {
                     "READ_MESSAGES": true, "SEND_MESSAGES": true,
                     "ATTACH_FILES": true, "CONNECT": true,
                     "CREATE_INSTANT_INVITE": false 
