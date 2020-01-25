@@ -1,67 +1,116 @@
-const discord = require("discord.js");
+const Discord = require('discord.js');
+// const randomString = require('random-string');
+module.exports = {
+	name: 'new',
+	description: 'Create a new ticket',
+	usage: '<brief description>',
+	aliases: ['ticket'],
+	example: 'new I found an error',
+	args: true,
+	cooldown: config.cooldown,
+	guildOnly: true,
+	execute(message, args) {
+		const client = message.client;
+		// command starts here
+		message.delete();
+		let topic = args.join(" ");
 
-module.exports.run = async(bot, message, args) => {
-    var botIcon = bot.user.displayAvatarURL;
+		// let num = randomString({
+		// 	length: 4,
+		// 	numeric: true,
+		// 	letters: false,
+		// 	special: false,
+		// });
+		let id = message.author.id.toString().substr(0, 4) + message.author.discriminator;
+		let chan = `ticket-${id}`;
 
-    const categoryid = "604450345179021314";
+		if (message.guild.channels.some(channel => chan.includes(channel.name))) {
+			if (config.useEmbeds) {
+				const err1 = new Discord.RichEmbed()
+					.setColor("#E74C3C")
+					.setDescription(`Je hebt al een open ticket.`)
+				return message.channel.send(err1)
+			} else {
+				message.channel.send(`Je hebt al een ticket.`)
+			}
 
-    var userName = message.author.username;
-    var userDiscriminator = message.author.discriminator;
+		};
 
-    var bool = false;
-
-    message.guild.channels.forEach((channel) => {
-
-        if (channel.name == userName.toLowerCase() + "-" + userDiscriminator) {
-            
-            message.channel.send("Je hebt al een ticket!");
-            bool = true;
-
-        }
-
-
-    });
-    if(bool == true) return;
-
-    var embedCreateTicket = new discord.RichEmbed()
-        .setTitle("TICKET WORDT AANGEMAAKT")
-        .setColor("#660066")
-        .setDescription("Je ticket wordt nu aangemaakt! Kijk in: #" + userName.toLowerCase() + "-" + userDiscriminator, ".")
-        .setTimestamp()
-        .setFooter('MemoriaNetwork', botIcon);
-
-        message.channel.send(embedCreateTicket);
-
-        message.guild.createChannel(userName + "-" + userDiscriminator, "text").then((createdChan) => {
-            createdChan.setParent(categoryid).then((settedParent) => {
-                settedParent.overwritePermissions(message.guild.roles.find('name', "@everyone"), { "READ_MESSAGES": false });
-                settedParent.overwritePermissions(message.author, {
-                    "READ_MESSAGES": true, "SEND_MESSAGES": true,
-                    "ATTACH_FILES": true, "CONNECT": true,
-                    "CREATE_INSTANT_INVITE": false 
-                    
-                  });
-                    
-                settedParent.overwritePermissions(message.guild.roles.find('name', "@Support"), { "READ_MESSAGES": true, "SEND_MESSAGES": true, "ATTACH_FILES": true, "CONNECT": true,"CREATE_INSTANT_INVITE": false }); 
-
-             
-        var embedParent = new discord.RichEmbed()
-            .setTitle("Hi, " + message.author.username.toString())
-            .setColor("#660066")
-            .setDescription("Stel je vraag en de support helpt je zo snel mogelijk!")
-            .setTimestamp()
-            .setFooter('MemoriaNetwork', botIcon);
-
-        settedParent.send(embedParent);
+		message.guild.createChannel(`ticket-${id}`, {
+			type: 'text'
+		}).then(async c => {
+			c.setParent(config.ticketsCat);
+			// let supportRole = message.guild.roles.find(`id`, config.supportRole)
+			let supportRole = message.guild.roles.get(config.supportRole)
+			if (!supportRole) return message.channel.send(":x: No **Support Team** role found.");
 
 
-            })
+			c.overwritePermissions(message.guild.defaultRole, {
+				VIEW_CHANNEL: false,
+				SEND_MESSAGES: false
+			})
+			c.overwritePermissions(message.member, {
+				VIEW_CHANNEL: true,
+				SEND_MESSAGES: true
+			})
+			c.overwritePermissions(supportRole, {
+				VIEW_CHANNEL: true,
+				SEND_MESSAGES: true
+			})
+			c.setTopic(`${message.author} | ${topic}`);
+			if (config.tagHereOnly) {
+				await c.send(`@here, een speler heeft een ticket gemaakt!\n`);
+			} else {
+				await c.send(`<@&${config.supportRole}>, een speler heeft een ticket gemaakt!\n`);
+			};
 
-        })
+			if (config.ticketImage) {
+				await c.send(`__**Hier is je ticket channel, ${message.author}**__`, {
+					files: [`./image.png`]
+				})
+			} else {
+				await c.send(`__**Hier is je ticket channel, ${message.author}**__`)
+			}
+
+			const created = new Discord.RichEmbed()
+				.setColor(config.colour)
+				.setDescription(`Je ticket (${c}) is gemaakt.\nLees de informatie & stel je vraag zo snel mogelijk!`)
+				.setTimestamp();
+			const welcome = new Discord.RichEmbed()
+				.setColor(config.colour)
+				.setDescription(`**Ticket topic:** \`${topic}\`\n\n${config.ticketText}`)
 
 
-}
+			if (config.useEmbeds) {
+				message.channel.send(created)
+				let w = await c.send(welcome)
+				await w.pin();
+				// c.fetchMessage(c.lastMessageID).delete()
+			} else {
+				message.channel.send(`Je ticket (${c}) is gemaakt.\nLees de informatie & stel je vraag zo snel mogelijk!.`)
+				let w = await c.send(`**Ticket topic:** \`${topic}\`\n\n${config.ticketText}`)
+				await w.pin()
+				// c.fetchMessage(c.lastMessageID).delete()
 
-module.exports.help = {
-    name: "ticket"
+			}
+			// log
+			if (config.useEmbeds) {
+				const embed = new Discord.RichEmbed()
+					.setAuthor(`${client.user.username} / Ticket Log`, client.user.avatarURL)
+					.setTitle("Nieuw Ticket")
+					.setColor(config.colour)
+					.setDescription(`\`${topic}\``)
+					.addField("Speler", message.author, true)
+					.addField("Channel", c, true)
+					.setFooter(`DiscordTickets`)
+					.setTimestamp();
+				client.channels.get(config.logChannel).send({
+					embed
+				})
+			} else {
+				client.channels.get(config.logChannel).send(`Een nieuw ticket gemaakt door: **${message.author.tag} (${message.author.id})**`);
+			}
+			log.info(`${message.author.tag} heeft het ticket (#ticket-${id}) gemaakt`)
+		})
+
 }
