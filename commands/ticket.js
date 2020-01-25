@@ -39,12 +39,12 @@ module.exports.run = async(bot, message, args) => {
                     "READ_MESSAGES": true, "SEND_MESSAGES": true,
                     "ATTACH_FILES": true, "CONNECT": true,
                     "CREATE_INSTANT_INVITE": false 
-                settedParent.overwritePermissions('name', "@support", {
-                    "READ_MESSAGES": true, "SEND_MESSAGES": true,
-                    "ATTACH_FILES": true, "CONNECT": true,
-                    "CREATE_INSTANT_INVITE": false 
+                    
+                  });
+                    
+                settedParent.overwritePermissions(message.guild.roles.find('name', "@Support"), { "READ_MESSAGES": true, "SEND_MESSAGES": true, "ATTACH_FILES": true, "CONNECT": true,"CREATE_INSTANT_INVITE": false }); 
 
-                });
+             
         var embedParent = new discord.RichEmbed()
             .setTitle("Hi, " + message.author.username.toString())
             .setColor("#660066")
