@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 // const randomString = require('random-string');
 module.exports = {
-	name: 'new',
+	name: 'ticket',
 	description: 'Create a new ticket',
 	usage: '<brief description>',
 	aliases: ['ticket'],
