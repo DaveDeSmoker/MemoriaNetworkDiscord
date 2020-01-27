@@ -32,7 +32,7 @@ module.exports.run = async(bot, message, args) => {
  
     var embedCreateTicket = new discord.RichEmbed()
         .setTitle("Hi, " + message.author.username)
-        .setDescription(`Je ticket is aangemaakt! Kijk in ${channel.name}`);
+        .setDescription("Je ticket is aangemaakt!");
  
     message.channel.send(embedCreateTicket);
  
