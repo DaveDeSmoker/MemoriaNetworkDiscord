@@ -3,7 +3,7 @@ const discord = require("discord.js");
 module.exports.run = async(bot, message, args) => {
     var botIcon = bot.user.displayAvatarURL;
 
-    const categoryid = "669255390139121664";
+    const categoryid = "604450345179021314";
 
     var userName = message.author.username;
     var userDiscriminator = message.author.discriminator;
@@ -39,7 +39,12 @@ module.exports.run = async(bot, message, args) => {
                     "READ_MESSAGES": true, "SEND_MESSAGES": true,
                     "ATTACH_FILES": true, "CONNECT": true,
                     "CREATE_INSTANT_INVITE": false 
-
+                })                   
+                settedParent.overwritePermissions(message.guild.roles.find('name', "@Support"), { "READ_MESSAGES": false });
+                settedParent.overwritePermissions(message.support, {
+                    "READ_MESSAGES": true, "SEND_MESSAGES": true,
+                    "ATTACH_FILES": true, "CONNECT": true,
+                    "CREATE_INSTANT_INVITE": false 
                 });
         var embedParent = new discord.RichEmbed()
             .setTitle("Hi, " + message.author.username.toString())
