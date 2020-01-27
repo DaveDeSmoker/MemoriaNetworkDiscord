@@ -5,64 +5,69 @@ module.exports.run = async(bot, message, args) => {
 
     const categoryid = "604450345179021314";
 
+    // Verkrijg Gebruikersnaam
     var userName = message.author.username;
+    // Verkrijg discriminator
     var userDiscriminator = message.author.discriminator;
-
+ 
+    // Als ticket al gemaakt is
     var bool = false;
-
+ 
+    // Kijk na als ticket al gemaakt is.
     message.guild.channels.forEach((channel) => {
-
+ 
+        // Als ticket is gemaakt, zend bericht.
         if (channel.name == userName.toLowerCase() + "-" + userDiscriminator) {
-            
-            message.channel.send("Je hebt al een ticket!");
+ 
+            message.channel.send("Je hebt al een ticket aangemaakt");
+ 
             bool = true;
-
+ 
         }
-
-
+ 
     });
-    if(bool == true) return;
-
+ 
+    // Als ticket return code.
+    if (bool == true) return;
+ 
     var embedCreateTicket = new discord.RichEmbed()
-        .setTitle("TICKET WORDT AANGEMAAKT")
-        .setColor("#660066")
-        .setDescription("Je ticket wordt nu aangemaakt! Kijk in: #" + userName.toLowerCase() + "-" + userDiscriminator, ".")
-        .setTimestamp()
-        .setFooter('MemoriaNetwork', botIcon);
-
-        message.channel.send(embedCreateTicket);
-
-        message.guild.createChannel(userName + "-" + userDiscriminator, "text").then((createdChan) => {
-            createdChan.setParent(categoryid).then((settedParent) => {
-                settedParent.overwritePermissions(message.guild.roles.find('name', "@everyone"), { "READ_MESSAGES": false });
-                settedParent.overwritePermissions(message.author, {
-                    "READ_MESSAGES": true, "SEND_MESSAGES": true,
-                    "ATTACH_FILES": true, "CONNECT": true,
-                    "CREATE_INSTANT_INVITE": false 
-                })                   
-                settedParent.overwritePermissions(message.guild.roles.find('name', "@Member"), { "READ_MESSAGES": false });
-                settedParent.overwritePermissions(message.role.support, {
-                    "READ_MESSAGES": true, "SEND_MESSAGES": true,
-                    "ATTACH_FILES": true, "CONNECT": true,
-                    "CREATE_INSTANT_INVITE": false 
-                });
-        var embedParent = new discord.RichEmbed()
-            .setTitle("Hi, " + message.author.username.toString())
-            .setColor("#660066")
-            .setDescription("Stel je vraag en de support helpt je zo snel mogelijk!")
-            .setTimestamp()
-            .setFooter('MemoriaNetwork', botIcon);
-
-        settedParent.send(embedParent);
-
-
-            })
-
-        })
-
-
+        .setTitle("Hi, " + message.author.username)
+        .setDescription("Je ticket is aangemaakt! Kijk in" + `${channel.name}`);
+ 
+    message.channel.send(embedCreateTicket);
+ 
+    // Maak kanaal en zet in juiste categorie.
+    message.guild.createChannel(userName + "-" + userDiscriminator, "text").then((createdChan) => { // Maak kanaal
+ 
+        createdChan.setParent(categoryId).then((settedParent) => { // Zet kanaal in category.
+ 
+            // Zet perms voor iedereen
+            settedParent.overwritePermissions(message.guild.roles.find('name', "@everyone"), { "READ_MESSAGES": false });
+            // Zet perms voor de gebruiker die ticket heeft aangemaakt.
+            settedParent.overwritePermissions(message.author, {
+ 
+                "READ_MESSAGES": true, "SEND_MESSAGES": true,
+                "ATTACH_FILES": true, "CONNECT": true,
+                "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
+ 
+            });
+ 
+            var embedParent = new discord.RichEmbed()
+                .setTitle("Hoi, " + message.author.username.toString())
+                .setDescription("Zet hier je vraag/bericht en de support helpt je zo snel mogelijk!");
+ 
+            settedParent.send(embedParent);
+        }).catch(err => {
+            message.channel.send("Er is iets fout gelopen.");
+        });
+ 
+    }).catch(err => {
+        message.channel.send("Er is iets fout gelopen.");
+    });
+ 
 }
-
+ 
 module.exports.help = {
-    name: "ticket"
+    name: "ticket",
+    description: "Maak een ticket aan"
 }
