@@ -41,7 +41,7 @@ module.exports.run = async(bot, message, args) => {
                     "CREATE_INSTANT_INVITE": false 
                 })                   
                 settedParent.overwritePermissions(message.guild.roles.find('name', "@Support"), { "READ_MESSAGES": false });
-                settedParent.overwritePermissions(message.support, {
+                settedParent.overwritePermissions(message.role, {
                     "READ_MESSAGES": true, "SEND_MESSAGES": true,
                     "ATTACH_FILES": true, "CONNECT": true,
                     "CREATE_INSTANT_INVITE": false 
