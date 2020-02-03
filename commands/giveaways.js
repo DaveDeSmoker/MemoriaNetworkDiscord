@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
     // Maak embed aan.
     var giveawayEmbed = new discord.RichEmbed()
         .setTitle("**GIVEAWAY** 🎉")
-        .setDescription(`\n **Prijs:** ${winnerCount} ${item} \n **Loopt af binnen** ${dateTime}!\n`)
+        .setDescription(`\n **Prijs:** ${item} \n **Verloopt binnen:** ${time} seconden!\n`)
         .setTimestamp()
         .setFooter('MemoriaNetwork', botIcon);
  
