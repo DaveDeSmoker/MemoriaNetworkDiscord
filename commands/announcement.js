@@ -23,7 +23,7 @@ module.exports.run = async(bot, message, args) => {
         args = args.join(" ").split(splitser);
 
         if(args[1] == undefined) args[1] = "#660066";
-        if(args[2] == undefined) args[2] = "announcement";
+        if(args[2] == undefined) args[2] = "meldingen";
 
         var options = {
 
