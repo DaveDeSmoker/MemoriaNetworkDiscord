@@ -48,7 +48,7 @@ bot.on("guildMemberAdd", member => {
 
     member.addRole(rolle);
 
-    const channel = member.guild.channels.find("name", "welcome");
+    const channel = member.guild.channels.find("name", "welkom");
 
     if (!channel) console.log("Kan kanaal niet vinden");
     var botIcon = bot.user.displayAvatarURL;
