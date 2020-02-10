@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
     var ideeEmbed = new discord.RichEmbed()
         .setTitle("Server Idee")
         .setColor("#660066")
-        .addDescription(idee)
+        .addDescription(`\n ${idee} \n`)
         .setFooter('Ingezonden door: ', message.author);
  
     // Vind het kanaal.
