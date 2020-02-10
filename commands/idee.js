@@ -21,8 +21,8 @@ module.exports.run = async (bot, message, args) => {
  
     // Verzend het bericht en voeg er reacties aan toe.
     ideeChannel.send(ideeEmbed).then(embedMessage => {
-        embedMessage.react(':ja:');
-        embedMessage.react(':nee:');
+        embedMessage.react('✅');
+        embedMessage.react('❎');
     });
  
     // Einde.
