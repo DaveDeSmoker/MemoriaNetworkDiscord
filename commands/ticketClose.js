@@ -13,7 +13,7 @@ module.exports.run = async(bot, message, args) => {
         var dmEmbed = new discord.RichEmbed()
         .setTitle(` ${dMessage} `)
         .setColor("#660066")
-        .setDescription(`Verzonden door: ${message.author.id}`)
+        .setDescription(`Verzonden door: ${dm}`)
         .setTimestamp()
         .setFooter('MemoriaNetwork', botIcon);
     
