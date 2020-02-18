@@ -11,11 +11,11 @@ module.exports.run = async(bot, message, args) => {
         if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
 
         var dmEmbed = new discord.RichEmbed()
-        .setTitle("❗️ BELANGERIJK ❗️")
+        .setTitle(` ${dMessage} `)
         .setColor("#660066")
-        .setDescription(` ${dMessage} `)
+        .addField(`Verzonden door: ${message.author}`)
         .setTimestamp()
-        .setFooter('Verzonden door: ${message.author} ', botIcon);
+        .setFooter('MemoriaNetwork', botIcon);
     
         dm.send(dmEmbed);
 
