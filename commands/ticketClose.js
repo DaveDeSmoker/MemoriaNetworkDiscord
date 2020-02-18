@@ -10,16 +10,15 @@ module.exports.run = async(bot, message, args) => {
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hiervoor niet genoeg permissie!")
         if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
 
-        var embedDm = new discord.RichEmbed()
+        var dmEmbed = new discord.RichEmbed()
         .setTitle("BELANGERIJK")
         .setColor("#660066")
-        .setDescription(`${dMessage}`)
+        .setDescription(` ${dMessage} `)
         .setTimestamp()
         .setFooter('Verzonden door: ${dm}', botIcon);
     
-        dm.send(embedDm);
+        dm.send(dmEmbed);
 
-        message.author.send(`${message.author} je hebt een bericht verstuurd naar ${dm}`);
        
 
 }
