@@ -172,23 +172,6 @@ bot.on("message", async message => {
         banChannel.send(ban);
 
         return;
-
-    }
-    if(command === `${prefix}dm`){      
-            
-        var dUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-        
-        if (!dUser) return message.channel.send("Can't find user!")
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!")
-        var dMessage = args.join(" ").slice(22);
-        if(dMessage.length < 1) return message.reply('You must supply a message!')
-    
-        dUser.send(`${dUser} A moderator from WP Coding Club sent you: ${dMessage}`)
-
-        message.author.send(`${message.author} You have sent your message to ${dUser}`)
-        
-        
-        return;
     }
     
 
