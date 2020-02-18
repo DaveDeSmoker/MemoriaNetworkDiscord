@@ -11,11 +11,11 @@ module.exports.run = async(bot, message, args) => {
         if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
 
         var dmEmbed = new discord.RichEmbed()
-        .setTitle("BELANGERIJK")
+        .setTitle("❗️ BELANGERIJK ❗️")
         .setColor("#660066")
         .setDescription(` ${dMessage} `)
         .setTimestamp()
-        .setFooter('Verzonden door: ${dm}', botIcon);
+        .setFooter('Verzonden door: ${message.author} ', botIcon);
     
         dm.send(dmEmbed);
 
