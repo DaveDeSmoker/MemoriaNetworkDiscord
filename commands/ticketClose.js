@@ -11,7 +11,7 @@ module.exports.run = async(bot, message, args) => {
         if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
 
         var dmEmbed = new discord.RichEmbed()
-        .setTitle(` ${dMessage} `)
+        .setDescription(` ${dMessage} `)
         .setColor("#660066")
         .addField(`Verzonden door:`, `${dm}`)
         .setTimestamp()
