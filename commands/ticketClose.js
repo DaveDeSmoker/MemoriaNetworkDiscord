@@ -13,13 +13,7 @@ module.exports.run = async(bot, message, args) => {
         var embedDm = new discord.RichEmbed()
         .setTitle("BELANGERIJK")
         .setColor("#660066")
-        .setDescription("${dMessage}")
-        .addField("!help", "Verkrijg dit command!!")
-        .addField("!members", "Bekijk het aantal members in de discord!")
-        .addField("!ip", "Bekijk het server ip & de discord link!")
-        .addField("!regels", "Bekijk de regels van de minecraft & discord server!")
-        .addField("!ticket", "Maak een ticket aan!")
-        .addField("!close", "Sluit een ticket!")
+        .setDescription(`${dMessage}`)
         .setTimestamp()
         .setFooter('Verzonden door: ${dm}', botIcon);
     
