@@ -10,9 +10,9 @@ module.exports.run = async(bot, message, args) => {
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!")
         if(dMessage.length < 1) return message.reply('You must supply a message!')
     
-        dUser.send(`${dUser} A moderator from WP Coding Club sent you: ${dMessage}`)
+        dm.send(`${dm} A moderator from WP Coding Club sent you: ${dMessage}`)
 
-        message.author.send(`${message.author} You have sent your message to ${dUser}`)
+        message.author.send(`${message.author} You have sent your message to ${dm}`)
        
 
 }
