@@ -5,7 +5,7 @@ exports.use = async (client, message, nothing, args, command) => {
     const fs = require('fs')
 
     if (args[0]) {
-        message.channel.send(new Discord.RichEmbed().setColor(Config.ticketcolor).setDescription('Your ticket has been created!\nWe will contact you in the ticket shortly!').setTimestamp().setAuthor('Tickets'))
+        message.channel.send(new Discord.RichEmbed().setColor(Config.ticketcolor).setDescription('Je ticket is gemaakt!\nStaff zal je zo snel mogelijk contacteren!').setTimestamp().setAuthor('Tickets'))
         message.guild.createChannel(`ticket-${data.id}`).then(async c => {
             let reason = args.join(" ");
             if (message.guild.channels.find(c => c.name.toLowerCase() === '-= tickets =-')) {
@@ -44,7 +44,7 @@ exports.use = async (client, message, nothing, args, command) => {
                 message.delete();
 
             }
-            await c.send(new Discord.RichEmbed().addField('Subject', `${reason}`).addField('Explain', "Explain in detail what you need for a faster response!" ).setDescription(`Thank you for creating a ticket.\nThe support team will assist you soon!`).setColor(Config.ticketcolor))
+            await c.send(new Discord.RichEmbed().addField('Onderwerp', `${reason}`).addField('Explain', "Leg alles goed in detail uit voor een snellere support!").setDescription(`Bedankt voor je ticket te maken.\nHet support team zal je zo snel mogelijk helpen!`).setColor(Config.ticketcolor))
         })
         data.id++;
         fs.writeFile('./tickets.json', '{\n"id":' + data.id + "\n}", (err) => {
