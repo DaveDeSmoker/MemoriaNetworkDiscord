@@ -175,7 +175,7 @@ bot.on("message", async message => {
     }
     
     
-    if(cmd === `!dm`){          
+    if(cmd === `${prefix}dm`){          
         var dm = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     if (!dm) return message.channel.send("Can't find user!")
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hiervoor geen permissie!")
