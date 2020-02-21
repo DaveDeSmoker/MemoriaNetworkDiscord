@@ -176,15 +176,15 @@ bot.on("message", async message => {
     
     
     if(cmd === `!dm`){          
-    let dm = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+        var dm = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     if (!dm) return message.channel.send("Can't find user!")
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hiervoor geen permissie!")
-    let dMessage = args.join(" ").slice(22);
+        var dMessage = args.join(" ").slice(22);
     if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
 
-    dm.send(`${dMessage}`)
+        dm.send(`${dMessage}`)
 
-    message.author.send(`${message.author} je hebt een bericht gestuurd naar ${dm}`)
+        message.author.send(`${message.author} je hebt een bericht gestuurd naar ${dm}`)
 }
     
 
