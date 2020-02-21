@@ -184,8 +184,13 @@ bot.on("message", async message => {
         var dMessage = args.join(" ").slice(22);
         
         if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
-
-        dm.send(`${dMessage}`);
+        var dmmessage = new discord.RichEmbed()
+            .setTitle("BELANGERIJK")
+            .setColor("#ee0000")
+            .setDescription(` ${dMessage}` )
+            .setTimestamp()
+            .setFooter('MemoriaNetwork', botIcon);
+        dmmessage.send
         
 }
     
