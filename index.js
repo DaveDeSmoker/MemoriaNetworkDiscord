@@ -182,9 +182,8 @@ bot.on("message", async message => {
         var dMessage = args.join(" ").slice(22);
     if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
 
-        dm.send(`${dMessage}`)
-
-        message.author.send(`${message.author} je hebt een bericht gestuurd naar ${dm}`)
+        dm.send(`${dMessage}`);
+        
 }
     
 
