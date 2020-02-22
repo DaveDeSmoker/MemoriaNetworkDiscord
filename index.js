@@ -64,19 +64,39 @@ bot.on("guildMemberAdd", member => {
     channel.send(joinMessage);
 });
 
-bot.on("message", function (message)
-{
-    var input = message.content.toUpperCase();
+var swearWords = ["staff","help","hulp"];
 
-    if(input === "HELP!");
-    {
-        let supportRoleObject = client.guilds.get('name', 'support');
-        bot.sendMessage(message, `${supportRoleObject} helpen je zo snel mogelijk!`);
-    }
-    if(input === "PING")
-    {
-        bot.sendMessage(message, "Pong!");
-    }
+bot.on("message", async message => {
+
+    if(message.author.bot) return;
+
+    if(message.channel.type === "dn") return;
+
+    var prefix = botConfig.prefix;
+
+    var messageArray = message.content.split(" ");
+
+    var command = messageArray[0];
+
+    var arguments = messageArray.slice(1);
+
+
+    var commands = bot.commands.get(command.slice(prefix.length));
+
+    if(commands) commands.run(bot, message, arguments);
+
+
+    var msg = message.content.toLowerCase();
+
+   for(var i = 0; i < swearWords.length; i++){
+
+        if(msg.includes(swearWords[i])) {
+
+            message.delete();
+
+            return message.channel.send("@Support **helpt je zo snel mogelijk!!**");
+
+        }
 
 });
 
@@ -86,7 +106,7 @@ bot.on("message", function (message)
 
 // });
 
-var swearWords = ["kanker","discord.gg","kkr","aids","downie","homo","kalf","hoer","slet","bitch","porno","pornhub","xnxx","porn"];
+var swearWords = ["kanker","discord.gg","kkr","aids","downie","homo","kalf","hoer","slet","bitch","porno","pornhub","xnxx","porn","kut"];
 
 bot.on("message", async message => {
 
