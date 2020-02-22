@@ -64,6 +64,22 @@ bot.on("guildMemberAdd", member => {
     channel.send(joinMessage);
 });
 
+bot.on("message", function (message)
+{
+    var input = message.content.toUpperCase();
+
+    if(input === "HELP!")
+    {
+        let supportRoleObject = message.server.roles.get('name', 'support');
+        bot.sendMessage(message, `${supportRoleObject} helpen je zo snel mogelijk!`);
+    }
+    if(input === "PING")
+    {
+        bot.sendMessage(message, "Pong!");
+    }
+
+});
+
 // bot.on("guildMemberAdd"), member => {
 //     const channel = member.guild.channels.find(name,"welcome")
 
