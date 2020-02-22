@@ -10,6 +10,8 @@ module.exports.run = async(bot, message, args) => {
         .setThumbnail(botIcon)
         .addField("Bot naam", bot.user.username)
         .addField("Gemaakt op", bot.user.createdAt)
+        .addField("Gemaakt door", "@DaveDeSmoker#4271")
+        .addField("Meer info?", "!help")
         .setTimestamp()
         .setFooter('MemoriaNetwork', botIcon);
 
