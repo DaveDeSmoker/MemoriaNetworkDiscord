@@ -140,12 +140,11 @@ bot.on("message", async message => {
             if (err) console.log(err);
 
         });
-        var user = message.guild.member(message.mentions.users.first() || message.guild.members(arguments[0]));
         // Zenden van een embed met gegevens.
         var embedLevel = new discord.RichEmbed()
             .setTitle("***LEVEL UP***")
             .setColor("#29e53f")
-            .setDescription('**${user}** is een level omhoog!')
+            .setDescription(`${message.author.username} is een level omhoog!`)
             .addField("Nieuw level: ", levelfile[idUser].level);
 
         message.channel.send(embedLevel);
@@ -168,6 +167,18 @@ bot.on("message", async message => {
 
 
    } 
+    if (command === 'avatar') {
+	if (args[0]) {
+		const user = getUserFromMention(args[0]);
+		if (!user) {
+			return message.reply('Zet er een speler bij.');
+		}
+
+		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
+	}
+
+	return message.channel.send(`${message.author.username}, jou avatar: ${message.author.displayAvatarURL}`);
+}
 
 
 
