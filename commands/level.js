@@ -1,4 +1,4 @@
-const fileLevels = require("./level.json");
+const fileLevels = require("../level.json");
 const discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
