@@ -64,44 +64,6 @@ bot.on("guildMemberAdd", member => {
     channel.send(joinMessage);
 });
 
-var helpWords = ["staff","help","hulp"];
-
-bot.on("message", async message => {
-
-    if(message.author.bot) return;
-
-    if(message.channel.type === "dn") return;
-
-    var prefix = botConfig.prefix;
-
-    var messageArray = message.content.split(" ");
-
-    var command = messageArray[0];
-
-    var arguments = messageArray.slice(1);
-
-
-    var commands = bot.commands.get(command.slice(prefix.length));
-
-    if(commands) commands.run(bot, message, arguments);
-
-
-    var msg = message.content.toLowerCase();
-
-   for(var i = 0; i < helpWords.length; i++){
-
-        if(msg.includes(helpWords[i])) {
-
-            message.delete();
-
-            return message.channel.send("@Support **helpt je zo snel mogelijk!!**");
-
-        }
-
-
-
-   } 
-
 // bot.on("guildMemberAdd"), member => {
 //     const channel = member.guild.channels.find(name,"welcome")
 
