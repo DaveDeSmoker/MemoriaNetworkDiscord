@@ -186,7 +186,7 @@ bot.on("message", async message => {
         
         if(dm.length < 1) return message.reply('Je moet een bericht achterlaten!');
 
-        dmUser.send(`${dMessage}`);
+        dmUser.send(`${dm}`);
         
         return;
     }
