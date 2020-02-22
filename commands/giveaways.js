@@ -7,6 +7,11 @@ module.exports.run = async (bot, message, args) => {
     var item = "";
     var time;
     var winnerCount;
+    var d = new Date,
+    dformat = [d.getMonth()+1,
+           d.getDate(),
+          [d.getHours(),
+           d.getMinutes(),
  
     // Nakijken als je perms hebt om dit command te doen.
     if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("Je hebt hiervoor niet de juiste permissie!");
@@ -25,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
  
     // Verval datum berekenen.
     var date = new Date().getTime();
-    var dateTime = new Date(date + (time * 1000));
+    var dateTime = new Date(d + (time * 1000));
  
     // Maak embed aan.
     var giveawayEmbed = new discord.RichEmbed()
