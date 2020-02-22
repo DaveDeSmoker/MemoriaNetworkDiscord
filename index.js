@@ -70,7 +70,7 @@ bot.on("message", function (message)
 
     if(input === "HELP!")
     {
-        let supportRoleObject = message.server.roles.get('name', 'support');
+        let supportRoleObject = message.server.guild.get('name', 'support');
         bot.sendMessage(message, `${supportRoleObject} helpen je zo snel mogelijk!`);
     }
     if(input === "PING")
