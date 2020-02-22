@@ -15,8 +15,8 @@ exports.run = (client, message, args, tools) => {
     const embed = new Discord.MessageEmbed()
         .setColor(0xfffff)
         .setTitle("REKENMACHINE")
-        .setDescription(`\`\`\`js\n${args.join(" ")}\`\`\``)
-        .addField("Uitkomst", ´\´\´\´js\n${resp}\`\`\``)
+        .setDescription(`${args.join(" ")}`)
+        .addField("Uitkomst", resp)
      message.channel.send(embed);
      
 }
