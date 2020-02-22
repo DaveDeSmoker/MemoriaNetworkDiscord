@@ -135,7 +135,7 @@ bot.on("message", async message => {
 
         // Wegschrijven van data. Je kan dit ook altijd opslaan maar dit zorgt ervoor dat het data
         // verkeer te groot wordt.
-        fs.writeFile("./level.json", JSON.stringify(levelfile), err => {
+        fs.writeFile("./level.json", JSON.stringify(levelFile), err => {
 
             if (err) console.log(err);
 
