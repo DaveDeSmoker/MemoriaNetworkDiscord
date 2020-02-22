@@ -64,7 +64,7 @@ bot.on("guildMemberAdd", member => {
     channel.send(joinMessage);
 });
 
-var swearWords = ["staff","help","hulp"];
+var helpWords = ["staff","help","hulp"];
 
 bot.on("message", async message => {
 
@@ -88,9 +88,9 @@ bot.on("message", async message => {
 
     var msg = message.content.toLowerCase();
 
-   for(var i = 0; i < swearWords.length; i++){
+   for(var i = 0; i < helpWords.length; i++){
 
-        if(msg.includes(swearWords[i])) {
+        if(msg.includes(helpWords[i])) {
 
             message.delete();
 
