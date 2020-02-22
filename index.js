@@ -193,7 +193,7 @@ bot.on("message", async message => {
         
         dmUser.send(dmEmbed);
         
-}
+    }
     
 
 });
