@@ -8,12 +8,11 @@ module.exports.run = async (bot, message, args) => {
     var time;
     var winnerCount;
     var d = new Date,
-    dformat = [d.getMonth()+1,
-       d.getDate(),
+    dformat = [d.getDate()+1,
+       d.getMonth(),
        d.getFullYear()].join('/')+' '+
       [d.getHours(),
-       d.getMinutes(),
-       d.getSeconds()].join(':');
+       d.getMinutes()].join(':');
                
  
     // Nakijken als je perms hebt om dit command te doen.
