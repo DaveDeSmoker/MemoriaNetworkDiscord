@@ -68,9 +68,9 @@ bot.on("message", function (message)
 {
     var input = message.content.toUpperCase();
 
-    if(input === "HELP!")
+    if(input === "HELP!");
     {
-        let supportRoleObject = message.server.guild.get('name', 'support');
+        let supportRoleObject = client.guilds.get('name', 'support');
         bot.sendMessage(message, `${supportRoleObject} helpen je zo snel mogelijk!`);
     }
     if(input === "PING")
