@@ -1,5 +1,6 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
+const levelFile = require("./level.json");
 
 const fs = require("fs");
 
@@ -91,6 +92,10 @@ bot.on("message", async message => {
 
     if(commands) commands.run(bot, message, arguments);
 
+    
+    var randomXp = Math.floor(Math.random(1) * 15) + 1;
+    
+    console.log(randomXp);
 
     var msg = message.content.toLowerCase();
 
