@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
     dformat = [d.getMonth()+1,
            d.getDate(),
           [d.getHours(),
-           d.getMinutes()].join(':');
+           d.getMinutes()].join(':')
  
     // Nakijken als je perms hebt om dit command te doen.
     if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("Je hebt hiervoor niet de juiste permissie!");
