@@ -177,7 +177,7 @@ bot.on("message", async message => {
     
     if(command === `${prefix}dm`) {     
         var botIcon = bot.user.displayAvatarURL;
-        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(arguments[0]);
+        var dmUser = message.guild.member(message.guild.members.get(arguments[0]) || message.mentions.users.first());
         
         if (!dmUser) return message.channel.send("Ik kan deze gebruiker niet vinden!");
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hier geen permissie voor!");
