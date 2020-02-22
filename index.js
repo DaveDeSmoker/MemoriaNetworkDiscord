@@ -175,17 +175,25 @@ bot.on("message", async message => {
     }
     
     
-    if(command === `${prefix}dm`) {          
-        var dUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if(command === `${prefix}dm`) {     
+        var botIcon = bot.user.displayAvatarURL;
+        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
         
-        if (!dUser) return message.channel.send("Can't find user!");
+        if (!dmUser) return message.channel.send("Can't find user!");
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!");
         
         var dm = args.join(" ").slice(22);
         
         if(dm.length < 1) return message.reply('You must supply a message!');
+        
+        var dmEmbed = new discord.RichEmbed()
+            .setTitle("BELANGERIJK")
+            .setColor("#ee0000")
+            .setDescription(` ${dm} `)
+            .setTimestamp()
+            .setFooter('MemoriaNetwork', botIcon);
 
-        dUser.send(`${dUser} A moderator from WP Coding Club sent you: ${dm}`);
+        dmUser.send(dmEmbed);
         
         return;
     }
