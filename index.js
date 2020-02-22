@@ -193,7 +193,7 @@ bot.on("message", async message => {
     
     if(command === `${prefix}dmembed`) {     
         var botIcon = bot.user.displayAvatarURL;
-        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.roles.get(arguments[0]);
+        var dmUser = message.guild.member(message.mentions.guild.first()) || message.guild.roles.get(arguments[0]);
         
         if (!dmUser) return message.channel.send("Ik kan deze gebruiken niet vinden!");
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hier geen permissie voor!");
