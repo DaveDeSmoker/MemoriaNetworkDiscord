@@ -2,11 +2,11 @@ const discord = require("discord.js");
 
 module.exports.run = async(bot, message, args) => {
 
-      if(!args[0]) return message.channel.send("Gebruik: !sps {steen, papier, schaar}");
+      if(!args[0]) return message.channel.send("Gebruik: !sps <steen, papier, schaar>");
       
       var options = ["steen", "papier", "schaar"];
       
-      var result = options[Math.floor(Math.random() * options.lenght)];
+      var result = options[Math.floor(Math.random() * options.length)];
       
       if(args[0] == "steen"){
       
