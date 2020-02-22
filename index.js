@@ -185,6 +185,8 @@ bot.on("message", async message => {
         dUser.send(`${dUser} A moderator from WP Coding Club sent you: ${dMessage}`)
 
         message.author.send(`${message.author} You have sent your message to ${dUser}`)
+        
+        return;
     }
     
 
