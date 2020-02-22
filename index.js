@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
-const levelFile = require("./level.json");
+const levelfile = require("./level.json");
 
 const fs = require("fs");
 
@@ -135,7 +135,7 @@ bot.on("message", async message => {
 
         // Wegschrijven van data. Je kan dit ook altijd opslaan maar dit zorgt ervoor dat het data
         // verkeer te groot wordt.
-        fs.writeFile("./level.json", JSON.stringify(levelFile), err => {
+        fs.writeFile("./level.json", JSON.stringify(levelfile), err => {
 
             if (err) console.log(err);
 
