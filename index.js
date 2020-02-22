@@ -175,24 +175,16 @@ bot.on("message", async message => {
     }
     
     
-    if(cmd === `${prefix}dm`){          
-        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-        
-        if(!dmUser) return message.channel.send("Ik kan deze persoon niet vinden.");
-        
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hiervoor geen permissie!");
-        var dm = args.join(" ").slice(22);
-        
-        if(dm.length < 1) return message.reply('Je moet een bericht achterlaten!')
-        var dmEmbed = new discord.RichEmbed()
-            .setTitle("BELANGERIJK")
-            .setColor("#ee0000")
-            .setDescription(` ${dm} `}
-            .setTimestamp()
-            .setFooter('MemoriaNetwork', botIcon);
-        
-        dmUser.send(dmEmbed);
-        
+    if(cmd === `!dm`){          
+        let dUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+        if (!dUser) return message.channel.send("Can't find user!")
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!")
+        let dMessage = args.join(" ").slice(22);
+        if(dMessage.length < 1) return message.reply('You must supply a message!')
+
+        dUser.send(`${dUser} A moderator from WP Coding Club sent you: ${dMessage}`)
+
+        message.author.send(`${message.author} You have sent your message to ${dUser}`)
     }
     
 
