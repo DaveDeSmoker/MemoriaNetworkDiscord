@@ -176,21 +176,22 @@ bot.on("message", async message => {
     
     
     if(cmd === `${prefix}dm`){          
-        var dm = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
         
-        if (!dm) return message.channel.send("Ik kan deze persoon niet vinden.");
+        if(!dmUser) return message.channel.send("Ik kan deze persoon niet vinden.");
         
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hiervoor geen permissie!");
-        var dMessage = args.join(" ").slice(22);
+        var dm = args.join(" ").slice(22);
         
-        if(dMessage.length < 1) return message.reply('Je moet een bericht achterlaten!')
-        var dmmessage = new discord.RichEmbed()
+        if(dm.length < 1) return message.reply('Je moet een bericht achterlaten!')
+        var dmEmbed = new discord.RichEmbed()
             .setTitle("BELANGERIJK")
             .setColor("#ee0000")
-            .setDescription(` ${dMessage}` )
+            .setDescription(` ${dm} `}
             .setTimestamp()
             .setFooter('MemoriaNetwork', botIcon);
-        dmmessage.send
+        
+        dmUser.send(dmEmbed);
         
 }
     
