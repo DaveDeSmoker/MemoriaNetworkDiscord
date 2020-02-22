@@ -98,7 +98,9 @@ bot.on("message", async message => {
 
         }
 
-});
+
+
+   } 
 
 // bot.on("guildMemberAdd"), member => {
 //     const channel = member.guild.channels.find(name,"welcome")
