@@ -8,7 +8,7 @@ module.exports.run = async(bot, message, args) => {
       
       var result = options[Math.floor(Math.random() * options.lenght)];
       
-      else if(args[0] == "steen"){
+      if(args[0] == "steen"){
       
           if(result == "papier"){
           
