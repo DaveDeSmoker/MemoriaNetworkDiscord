@@ -179,12 +179,28 @@ bot.on("message", async message => {
         var botIcon = bot.user.displayAvatarURL;
         var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(arguments[0]);
         
-        if (!dmUser) return message.channel.send("Can't find user!");
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!");
+        if (!dmUser) return message.channel.send("Ik kan deze gebruiker niet vinden!");
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hier geen permissie voor!");
         
         var dm = arguments.join(" ").slice(22);
         
-        if(dm.length < 1) return message.reply('You must supply a message!');
+        if(dm.length < 1) return message.reply('Je moet een bericht achterlaten!');
+
+        dmUser.send(`${dMessage}`);
+        
+        return;
+    }
+    
+    if(command === `${prefix}dmembed`) {     
+        var botIcon = bot.user.displayAvatarURL;
+        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(arguments[0]);
+        
+        if (!dmUser) return message.channel.send("Ik kan deze gebruiken niet vinden!");
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Je hebt hier geen permissie voor!");
+        
+        var dm = arguments.join(" ").slice(22);
+        
+        if(dm.length < 1) return message.reply('Je moet een bericht achterlaten!');
         
         var dmEmbed = new discord.RichEmbed()
             .setTitle("BELANGERIJK")
