@@ -167,7 +167,7 @@ bot.on("message", async message => {
 
 
    } 
-    if (command === 'avatar') {
+    if (command === '${prefix}avatar') {
 	if (args[0]) {
 		const user = getUserFromMention(args[0]);
 		if (!user) {
