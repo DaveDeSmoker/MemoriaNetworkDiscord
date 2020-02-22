@@ -177,12 +177,12 @@ bot.on("message", async message => {
     
     if(command === `${prefix}dm`) {     
         var botIcon = bot.user.displayAvatarURL;
-        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]));
+        var dmUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(arguments[0]);
         
         if (!dmUser) return message.channel.send("Can't find user!");
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!");
         
-        var dm = args.join(" ").slice(22);
+        var dm = arguments.join(" ").slice(22);
         
         if(dm.length < 1) return message.reply('You must supply a message!');
         
