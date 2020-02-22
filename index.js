@@ -140,11 +140,12 @@ bot.on("message", async message => {
             if (err) console.log(err);
 
         });
-
+        var user = message.guild.member(message.mentions.users.first() || message.guild.members(arguments[0]));
         // Zenden van een embed met gegevens.
         var embedLevel = new discord.RichEmbed()
             .setTitle("***LEVEL UP***")
             .setColor("#29e53f")
+            .setDescription('**${user}** is een level omhoog!')
             .addField("Nieuw level: ", levelfile[idUser].level);
 
         message.channel.send(embedLevel);
