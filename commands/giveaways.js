@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
     var time;
     var winnerCount;
     var d = new Date,
-    dformat = [d.getMonth()+1,d.getDate(),[d.getHours(),d.getMinutes()].join(':');
+    dformat = [d.getMonth()+1,d.getDate(),[d.getHours(),d.getMinutes()];
                
  
     // Nakijken als je perms hebt om dit command te doen.
