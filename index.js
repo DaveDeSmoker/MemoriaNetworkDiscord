@@ -178,17 +178,14 @@ bot.on("message", async message => {
     if(command === `${prefix}dm`) {          
         var dUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
         
-        if (!dUser) return message.channel.send("Can't find user!")
-        
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!")
+        if (!dUser) return message.channel.send("Can't find user!");
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You can't you that command!");
         
         var dm = args.join(" ").slice(22);
         
-        if(dm.length < 1) return message.reply('You must supply a message!')
+        if(dm.length < 1) return message.reply('You must supply a message!');
 
-        dUser.send(`${dUser} A moderator from WP Coding Club sent you: ${dm}`)
-
-        message.author.send(`${message.author} You have sent your message to ${dUser}`)
+        dUser.send(`${dUser} A moderator from WP Coding Club sent you: ${dm}`);
         
         return;
     }
