@@ -95,6 +95,8 @@ bot.on("message", async message => {
 
 
     });
+
+}
     
 
     var msg = message.content.toLowerCase();
