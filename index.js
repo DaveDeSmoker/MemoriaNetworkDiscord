@@ -92,12 +92,11 @@ bot.on("message", async message => {
     if(commands) commands.run(bot, message, arguments);
 
    
+	}
 
 
     });
 
-}
-    
 
     var msg = message.content.toLowerCase();
 
