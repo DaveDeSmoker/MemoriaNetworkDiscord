@@ -70,7 +70,6 @@ bot.on("guildMemberAdd", member => {
 
 // });
 
-var swearWords = ["kanker","discord.gg","kkr","aids","downie","homo","kalf","hoer","slet","bitch","porno","pornhub","xnxx","porn","kut"];
 
 bot.on("message", async message => {
 
@@ -92,9 +91,9 @@ bot.on("message", async message => {
     if(commands) commands.run(bot, message, arguments);
 
    
-      
+}
 
-
+   var swearWords = ["kanker","discord.gg","kkr","aids","downie","homo","kalf","hoer","slet","bitch","porno","pornhub","xnxx","porn","kut"];
     var msg = message.content.toLowerCase();
 
    for(var i = 0; i < swearWords.length; i++){
