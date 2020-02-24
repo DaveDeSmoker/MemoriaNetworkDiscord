@@ -111,45 +111,6 @@ bot.on("message", async message => {
         };
 
     }
-
-    // Voeg xp toe.
-    levelfile[idUser].xp += randomxp;
-
-    // Verkrijg level van de gebruiker.
-    var levelUser = levelfile[idUser].level;
-    // Verkrijg xp van de gebruiker.
-    var xpUser = levelfile[idUser].xp;
-    // Bereken volgend level op basis van de xp.
-    var nextLevelXp = levelUser * 300;
-    
-    // Als het level 0 is zet dan xp op 100.
-    if (nextLevelXp === 0) nextLevelXp = 100;
-
-    console.log(nextLevelXp + " " + xpUser);
-
-    // Als gebruikeer volgend level heeft bereikt zet level 1 hoger en zet in file.
-    // Let op Nodemon restart wegens dat we de file als require hebben binnengehaald.
-    if (xpUser >= nextLevelXp) {
-
-        levelfile[idUser].level += 1;
-
-        // Wegschrijven van data. Je kan dit ook altijd opslaan maar dit zorgt ervoor dat het data
-        // verkeer te groot wordt.
-        fs.writeFile("./level.json", JSON.stringify(levelfile), err => {
-
-            if (err) console.log(err);
-
-        });
-        // Zenden van een embed met gegevens.
-        var embedLevel = new discord.RichEmbed()
-            .setTitle("***LEVEL UP***")
-            .setColor("#29e53f")
-            .setDescription(`${message.author.username} is een level omhoog!`)
-            .addField("Nieuw level: ", levelfile[idUser].level);
-
-        message.channel.send(embedLevel);
-
-    }
     
 
     var msg = message.content.toLowerCase();
