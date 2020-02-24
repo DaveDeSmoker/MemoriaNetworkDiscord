@@ -91,7 +91,9 @@ bot.on("message", async message => {
     if(commands) commands.run(bot, message, arguments);
 
    
-}
+    })
+
+});
 
    var swearWords = ["kanker","discord.gg","kkr","aids","downie","homo","kalf","hoer","slet","bitch","porno","pornhub","xnxx","porn","kut"];
     var msg = message.content.toLowerCase();
