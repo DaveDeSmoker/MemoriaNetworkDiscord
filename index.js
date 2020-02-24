@@ -95,9 +95,6 @@ bot.on("message", async message => {
 	}
 
 
-    });
-
-
     var msg = message.content.toLowerCase();
 
    for(var i = 0; i < swearWords.length; i++){
