@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
-const levelfile = require("./level.json");
 
 const fs = require("fs");
 
@@ -92,21 +91,7 @@ bot.on("message", async message => {
 
     if(commands) commands.run(bot, message, arguments);
 
-    
-    var randomxp = Math.floor(Math.random(1) * 15) + 1;
-
-    // Verkrijg id van de gebruiker.
-    var idUser = message.author.id;
-
-    // console.log(randomxp);
-
-    // Als persoon nog niet in file is maak dan standaard aan.
-    if (!levelfile[idUser]) {
-
-        levelfile[idUser] = {
-
-            xp: 0,
-            level: 0
+   
 
         };
 
