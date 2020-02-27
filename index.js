@@ -70,6 +70,7 @@ bot.on("guildMemberAdd", member => {
 
 // });
 
+var swearWords = ["kanker","discord.gg","kkr","aids","downie","homo","kalf","hoer","slet","bitch","porno","pornhub","xnxx","porn"];
 
 bot.on("message", async message => {
 
@@ -90,25 +91,22 @@ bot.on("message", async message => {
 
     if(commands) commands.run(bot, message, arguments);
 
-   
-    }
 
-});
+    var msg = message.content.toLowerCase();
 
-	}
+   for(var i = 0; i < swearWords.length; i++){
 
-    if (command === '${prefix}avatar') {
-	if (args[0]) {
-		const user = getUserFromMention(args[0]);
-		if (!user) {
-			return message.reply('Zet er een speler bij.');
-		}
+        if(msg.includes(swearWords[i])) {
 
-		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
-	}
+            message.delete();
 
-	return message.channel.send(`${message.author.username}, jou avatar: ${message.author.displayAvatarURL}`);
-}
+            return message.channel.send("Je hebt een bericht verstuurd met ongepaste content!").then(msg => msg.delete(5000));
+
+        }
+
+
+
+   } 
 
 
 
@@ -174,8 +172,9 @@ bot.on("message", async message => {
         banChannel.send(ban);
 
         return;
+
     }
-   
+    
 
 });
 
