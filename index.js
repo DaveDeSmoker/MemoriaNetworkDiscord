@@ -95,22 +95,7 @@ bot.on("message", async message => {
 
 });
 
-   var swearWords = ["kanker","discord.gg","kkr","aids","downie","homo","kalf","hoer","slet","bitch","porno","pornhub","xnxx","porn","kut"];
-    var msg = message.content.toLowerCase();
 
-   for(var i = 0; i < swearWords.length; i++){
-
-        if(msg.includes(swearWords[i])) {
-
-            message.delete();
-
-            return message.channel.send("Je hebt een bericht verstuurd met ongepaste content!").then(msg => msg.delete(5000));
-
-        }
-
-
-
-   } 
     if (command === '${prefix}avatar') {
 	if (args[0]) {
 		const user = getUserFromMention(args[0]);
@@ -189,9 +174,7 @@ bot.on("message", async message => {
 
         return;
     }
-    
-    
-    
+   
 
 });
 
