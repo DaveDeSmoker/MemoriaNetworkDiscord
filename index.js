@@ -95,6 +95,7 @@ bot.on("message", async message => {
 
 });
 
+	}
 
     if (command === '${prefix}avatar') {
 	if (args[0]) {
