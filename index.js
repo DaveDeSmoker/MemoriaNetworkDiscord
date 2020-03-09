@@ -175,12 +175,14 @@ bot.on("message", async message => {
 
     }
     
-    if (message.content === '!avatar') {
+    if (message.content === `${prefix}ban`) {
     	var member= message.mentions.members.first();
-    	var embed = new Discord.RichEmbed()
+        
+    	var embed = new discord.RichEmbed()
             .setImage(message.member.avatarURL)
-            .setColor('#275BF0')
-    	message.channel.send(embed)
+            .setColor('#275BF0');
+        
+    	message.channel.send(embed);
   }	
     
 });
