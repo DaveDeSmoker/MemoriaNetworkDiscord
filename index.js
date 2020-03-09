@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
-const levelfile = require("./level.json");
 
 const fs = require("fs");
 
@@ -176,82 +175,14 @@ bot.on("message", async message => {
 
     }
     
-        if (command === `${prefix}avatar`) {
-	if (arguments[0]) {
-	var user = message.guild.member(message.mentions.users.first() || message.guild.members(arguments[0]));
-		if (!user) {
-			return message.reply('Zet er een speler bij.');
-		}
-
-		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
-	}
-
-	return message.channel.send(`${message.author.username}, jou avatar: ${message.author.displayAvatarURL}`);
-}
-	
-// Genereer random xp.
-    var randomxp = Math.floor(Math.random(1) * 15) + 1;
-
-    // Verkrijg id van de gebruiker.
-    var idUser = message.author.id;
-
-    // console.log(randomxp);
-
-    // Als persoon nog niet in file is maak dan standaard aan.
-    if (!levelfile[idUser]) {
-
-        levelfile[idUser] = {
-
-            xp: 0,
-            level: 0
-
-        };
-
-    }
-
-    // Voeg xp toe.
-    levelfile[idUser].xp += randomxp;
-
-    // Verkrijg level van de gebruiker.
-    var levelUser = levelfile[idUser].level;
-    // Verkrijg xp van de gebruiker.
-    var xpUser = levelfile[idUser].xp;
-    // Bereken volgend level op basis van de xp.
-    var nextLevelXp = levelUser * 300;
+    if (message.content === '!avatar') {
+    	var member= message.mentions.members.first();
+    	var embed = new Discord.RichEmbed()
+            .setImage(message.member.avatarURL)
+            .setColor('#275BF0')
+    	message.channel.send(embed)
+  }	
     
-    // Als het level 0 is zet dan xp op 100.
-    if (nextLevelXp === 0) nextLevelXp = 100;
-
-    console.log(nextLevelXp + " " + xpUser);
-
-    // Als gebruikeer volgend level heeft bereikt zet level 1 hoger en zet in file.
-    // Let op Nodemon restart wegens dat we de file als require hebben binnengehaald.
-    if (xpUser >= nextLevelXp) {
-
-        levelfile[idUser].level += 1;
-
-        // Wegschrijven van data. Je kan dit ook altijd opslaan maar dit zorgt ervoor dat het data
-        // verkeer te groot wordt.
-        fs.writeFile("./level.json", JSON.stringify(levelfile), err => {
-
-            if (err) console.log(err);
-
-        });
-
-        // Zenden van een embed met gegevens.
-        var embedLevel = new discord.RichEmbed()
-            .setTitle("***LEVEL UP***")
-	    .setThumbnail(`${message.author.displayAvatarURL}`)
-            .setColor("#29e53f")
-            .setDescription('**${user}** is een level omhoog!')
-            .setDescription(`${message.author.username} is een level omhoog!`)
-            .addField("Nieuw level: ", levelfile[idUser].level);
-
-        message.channel.send(embedLevel);
-
-    }
-    
-
 });
 
 
