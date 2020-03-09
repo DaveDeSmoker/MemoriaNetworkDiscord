@@ -175,7 +175,7 @@ bot.on("message", async message => {
 
     }
     
-    if (message.content === `${prefix}ban`) {
+    if (message.content === `${prefix}avatar`) {
     	var member= message.mentions.members.first();
         
     	var embed = new discord.RichEmbed()
