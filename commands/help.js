@@ -16,6 +16,7 @@ module.exports.run = async (bot, message, args) => {
         .addField("**!level**", "Bekijk je level & hoeveel xp je nog nodig hebt voor een volgend level!")
         .addField("**!info**", "Verkrijg info over de discord bot!")
         .addField("**!idee {idee}**", "Laat een idee achter!")
+        .addField("**!review {cijfer} {review}**", "Laat een review achter!")
         .addField("**!sps {steen, papier, schaar}**", "Speel steen papier schaar!")
         .addField("**!new**", "Maak een ticket aan!")
         .setTimestamp()
