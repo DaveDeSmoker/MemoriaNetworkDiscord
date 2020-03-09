@@ -179,7 +179,7 @@ bot.on("message", async message => {
     	var member= message.mentions.members.first();
         
     	var embed = new discord.RichEmbed()
-            .setImage(message.member.avatarURL)
+            .setImage(member.avatarURL)
             .setColor('#275BF0');
         
     	message.channel.send(embed);
