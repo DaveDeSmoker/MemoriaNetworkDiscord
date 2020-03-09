@@ -1,5 +1,6 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
+const levelfile = require("./level.json");
 
 const fs = require("fs");
 
@@ -174,6 +175,19 @@ bot.on("message", async message => {
         return;
 
     }
+    
+        if (command === `${prefix}avatar`) {
+	if (args[0]) {
+		const user = getUserFromMention(args[0]);
+		if (!user) {
+			return message.reply('Zet er een speler bij.');
+		}
+
+		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
+	}
+
+	return message.channel.send(`${message.author.username}, jou avatar: ${message.author.displayAvatarURL}`);
+}
     
 
 });
