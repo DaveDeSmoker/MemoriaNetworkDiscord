@@ -178,7 +178,7 @@ bot.on("message", async message => {
     
         if (command === `${prefix}avatar`) {
 	if (arguments[0]) {
-		const user = message.guild.member(message.mentions.users.first() || message.guild.members(arguments[0]));
+	var user = message.guild.member(message.mentions.users.first() || message.guild.members(arguments[0]));
 		if (!user) {
 			return message.reply('Zet er een speler bij.');
 		}
