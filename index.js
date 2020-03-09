@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
-const levelfile = require("./level.json");
+const levelfile = require(".level.json");
 
 const fs = require("fs");
 
@@ -178,7 +178,7 @@ bot.on("message", async message => {
     
         if (command === `${prefix}avatar`) {
 	if (arguments[0]) {
-		const user = getUserFromMention(args[0]);
+		const user = message.guild.member(message.mentions.users.first() || message.guild.members(arguments[0]));
 		if (!user) {
 			return message.reply('Zet er een speler bij.');
 		}
