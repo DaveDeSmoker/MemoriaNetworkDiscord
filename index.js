@@ -177,7 +177,7 @@ bot.on("message", async message => {
     }
     
         if (command === `${prefix}avatar`) {
-	if (args[0]) {
+	if (arguments[0]) {
 		const user = getUserFromMention(args[0]);
 		if (!user) {
 			return message.reply('Zet er een speler bij.');
@@ -241,6 +241,7 @@ bot.on("message", async message => {
         // Zenden van een embed met gegevens.
         var embedLevel = new discord.RichEmbed()
             .setTitle("***LEVEL UP***")
+	    .setThumbnail(`${message.author.displayAvatarURL}`)
             .setColor("#29e53f")
             .setDescription('**${user}** is een level omhoog!')
             .setDescription(`${message.author.username} is een level omhoog!`)
