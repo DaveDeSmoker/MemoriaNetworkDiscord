@@ -174,15 +174,19 @@ bot.on("message", async message => {
         return;
 
     }
-    
-    if (message.content === `${prefix}avatar`) {
-    	var member= message.mentions.members.first();
-        
-    	var embed = new discord.RichEmbed()
-            .setImage(member.avatarURL)
-            .setColor('#275BF0');
-        
-    	message.channel.send(embed);
+
+        if (message.content.startsWith('!avatar') {
+        if (!message.mentions.users.size) {
+
+        return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+
+    }
+
+
+
+    const avatarList = message.mentions.users.map(user => {
+
+        return `${user.username}\'s avatar: ${user.displayAvatarURL}`;
   }	
     
 });
