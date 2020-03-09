@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args) => {
     const review = new discord.RichEmbed()
         .setTitle(`${message.author.username} heeft een review geschreven! :tada:`)
         .setColor("#00ff00")
-        .setThumbnail("https://www.thebelgiumgames.be/afbeeldingen/jensHoofd.png")
+        .setThumbnail("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.planetminecraft.com%2Fserver%2Fmemorianetwork-4382336%2F&psig=AOvVaw0UauwXtfp3LfwTnE0d2CmJ&ust=1583841299957000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjSv-KqjegCFQAAAAAdAAAAABAE")
         .addField("Sterren:", `${sterren}`)
         .addField("Review:", `${bericht}`);
  
