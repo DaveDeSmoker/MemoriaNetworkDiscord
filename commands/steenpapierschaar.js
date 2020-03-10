@@ -28,7 +28,7 @@ module.exports.run = async(bot, message, args) => {
               message.channel.send(`Ik heb ${result} :moyai:, jij wint.`);
           }else if(result == "schaar"){
               message.channel.send(`Ik heb ${result} :scissors:, ik win.`);
-          }else if(result == "steen"){
+          }else if(result == "papier"){
               message.channel.send(`Ik heb ${result} :notepad_spiral:, het is gelijkspel.`);
           }
 
