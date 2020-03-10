@@ -49,7 +49,7 @@ module.exports.run = async (bot, message, args) => {
         .setTitle("**GIVEAWAY** 🎉")
         .addField(`Vervalt:`, dateTime)
         .setDescription(`**Prijs:** ${item}`)
-        .setColor("#660066");
+        .setColor("#660066")
         .setTimestamp()
         .setFooter('MemoriaNetwork | Giveaway', botIcon);
  
