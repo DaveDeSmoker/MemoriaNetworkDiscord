@@ -2,6 +2,20 @@ const discord = require("discord.js");
  
 module.exports.run = async (bot, message, args) => {
  
+ 
+        if(args[0] == null) {
+
+            var useMessage = new discord.RichEmbed()
+            .setTitle("GEBRUIK ANNOUNCEMENT")
+            .setColor("#660066")
+            .setDescription(`Maak een announcement door gebruik te maken van: \n !announcement Bericht ${splitser} Kleur ${splitser} Kanaal`)
+            .setTimestamp()
+            .setFooter('MemoriaNetwork', botIcon);
+
+        return message.channel.send(useMessage);
+            
+        }
+
     // Argumenten die we later nodig hebben.
     var item = "";
     var time;
