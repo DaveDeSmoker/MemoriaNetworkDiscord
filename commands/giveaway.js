@@ -2,20 +2,24 @@ const discord = require("discord.js");
  
 module.exports.run = async (bot, message, args) => {
  
- 
+    var botIcon = bot.user.displayAvatarURL;
+
+    if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("Je hebt helaas niet de juiste permissie!");
+
+
         if(args[0] == null) {
 
             var useMessage = new discord.RichEmbed()
-            .setTitle("GEBRUIK ANNOUNCEMENT")
+            .setTitle("GEBRUIK GIVEAWAY")
             .setColor("#660066")
-            .setDescription(`Maak een announcement door gebruik te maken van: \n !announcement Bericht ${splitser} Kleur ${splitser} Kanaal`)
+            .setDescription(`Maak een giveaway door gebruik te maken van: \n !giveaway {aantal winners} {tijd} {prijs}`)
             .setTimestamp()
             .setFooter('MemoriaNetwork', botIcon);
 
         return message.channel.send(useMessage);
             
         }
-
+            
     // Argumenten die we later nodig hebben.
     var item = "";
     var time;
