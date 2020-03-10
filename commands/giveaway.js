@@ -1,249 +1,121 @@
-const { Collection, Message, version } = require('discord.js');
-const { EventEmitter } = require('events');
+const discord = require("discord.js");
 
-/**
- * Represents a Giveaway
- */
-class Giveaway extends EventEmitter {
-    /**
-     * @param {GiveawaysManager} manager The Giveaway Manager
-     * @param {Object} options The giveaway data
-     */
-    constructor(manager, options) {
-        super();
-        /**
-         * The Giveaway manager
-         * @type {GiveawaysManager}
-         */
-        this.manager = manager;
-        /**
-         * The Discord Client
-         * @type {Client}
-         */
-        this.client = manager.client;
-        /**
-         * The giveaway prize
-         * @type {string}
-         */
-        this.prize = options.prize;
-        /**
-         * The start date of the giveaway
-         * @type {Number}
-         */
-        this.startAt = options.startAt;
-        /**
-         * The end date of the giveaway
-         * @type {Number}
-         */
-        this.endAt = options.endAt;
-        /**
-         * Whether the giveaway is ended
-         * @type {Boolean}
-         */
-        this.ended = options.ended;
-        /**
-         * The channel ID of the giveaway
-         * @type {Snowflake}
-         */
-        this.channelID = options.channelID;
-        /**
-         * The message ID of the giveaway
-         * @type {Snowflake}
-         */
-        this.messageID = options.messageID;
-        /**
-         * The guild ID of the giveaway
-         * @type {Snowflake}
-         */
-        this.guildID = options.guildID;
-        /**
-         * The number of winners for this giveaway
-         * @type {number}
-         */
-        this.winnerCount = parseInt(options.winnerCount);
-        /**
-         * The mention of the user who hosts this giveaway
-         * @type {?string}
-         */
-        this.hostedBy = options.hostedBy;
-        /**
-         * The giveaway messages
-         * @type {GiveawaysMessages}
-         */
-        this.messages = options.messages;
-        /**
-         * The giveaway data
-         * @type {Object}
-         */
-        this.options = options;
-    }
+module.exports.run = async (bot, message, args) => {
 
-    /**
-     * The remaining time before the end of the giveaway
-     * @type {Number}
-     * @readonly
-     */
-    get remainingTime() {
-        return this.endAt - Date.now();
-    }
+    var botIcon = bot.user.displayAvatarURL;
+    if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("Je hebt helaas niet de juiste permissie!");
+    if(args[0] == null) {
+            var useMessage = new discord.RichEmbed()
+            .setTitle("GEBRUIK GIVEAWAY")
+            .setColor("#660066")
+            .setDescription(`Maak een giveaway door gebruik te maken van: \n !giveaway {aantal winners} {tijd} {prijs}`)
+            .setTimestamp()
+            .setFooter('MemoriaNetwork', botIcon);
+        return message.channel.send(useMessage);
 
-    /**
-     * The total duration of the giveaway
-     * @type {Number}
-     * @readonly
-     */
-    get giveawayDuration() {
-        return this.endAt - this.startAt;
-    }
+        }
 
-    /**
-     * The color of the giveaway embed
-     * @type {string}
-     */
-    get embedColor() {
-        return this.options.embedColor || this.manager.options.default.embedColor;
-    }
+    // Argumenten die we later nodig hebben.
+    var item = "";
+    var time;
+    var winnerCount;
 
-    /**
-     * The color of the giveaway embed when it's ended
-     * @type {string}
-     */
-    get embedColorEnd() {
-        return this.options.embedColorEnd || this.manager.options.default.embedColorEnd;
-    }
+    // Nakijken als je perms hebt om dit command te doen.
+    if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Sorry jij kan dit niet doen");
 
-    /**
-     * The reaction on the giveaway message
-     * @type {string}
-     */
-    get reaction() {
-        return this.options.reaction || this.manager.options.default.reaction;
-    }
+    // !giveaway aantalWinnaars seconden itemOmTeWinnen.
 
-    /**
-     * Whether the bots are able to win the giveaway
-     * @type {Boolean}
-     */
-    get botsCanWin() {
-        return this.options.botsCanWin || this.manager.options.default.botsCanWin;
-    }
+    // Aantal winnaars opvragen.
+    winnerCount = args[0];
+    // Tijd hoelang het moet duren.
+    time = args[1];
+    // Welke prijs men kan winnen.
+    item = args.splice(2, args.length).join(' ');
 
-    /**
-     * Members with any of these permissions won't be able to win a giveaway.
-     * @type {Array<PermissionsResolvable>}
-     */
-    get exemptPermissions() {
-        return this.options.exemptPermissions || this.manager.options.default.exemptPermissions;
-    }
+    // Verwijder het bericht dat net is gemaakt door de gebruiker.
+    message.delete();
 
-    /**
-     * Function to filter members. If true is returned, the member won't be able to win the giveaway.
-     * @type {Function}
-     */
-    get exemptMembers() {
-        return this.options.exemptMembers || this.manager.options.default.exemptMembers;
-    }
+    // Verval datum berekenen.
+    var date = new Date().getTime();
+    var dateTime = new Date(date + (time * 1000));
 
-    /**
-     * The channel of the giveaway
-     * @type {Channel}
-     * @readonly
-     */
-    get channel() {
-        return this.manager.v12 ? this.client.channels.cache.get(this.channelID) : this.client.channels.get(this.channelID);
-    }
+    // Maak embed aan.
+    var giveawayEmbed = new discord.RichEmbed()
+        .setTitle("**GIVEAWAY** 🎉")
+        .setDescription(`**Prijs:** ${item} \n **Vervalt:** ${dateTime}`)
+        .setColor("#660066")
+        .setTimestamp()
+        .setFooter('MemoriaNetwork | Giveaway', botIcon);
 
-    /**
-     * Gets the content of the giveaway
-     * @type {string}
-     * @readonly
-     */
-    get content() {
-        let roundTowardsZero = this.remainingTime > 0 ? Math.floor : Math.ceil;
-        // Gets days, hours, minutes and seconds
-        let days = roundTowardsZero(this.remainingTime / 86400000),
-            hours = roundTowardsZero(this.remainingTime / 3600000) % 24,
-            minutes = roundTowardsZero(this.remainingTime / 60000) % 60,
-            seconds = roundTowardsZero(this.remainingTime / 1000) % 60;
-        // Increment seconds if equal to zero
-        if (seconds === 0) seconds++;
-        // Whether values are inferior to zero
-        let isDay = days > 0,
-            isHour = hours > 0,
-            isMinute = minutes > 0;
-        let dayUnit =
-                days < 2 && (this.messages.units.pluralS || this.messages.units.days.endsWith('s'))
-                    ? this.messages.units.days.substr(0, this.messages.units.days.length - 1)
-                    : this.messages.units.days,
-            hourUnit =
-                hours < 2 && (this.messages.units.pluralS || this.messages.units.hours.endsWith('s'))
-                    ? this.messages.units.hours.substr(0, this.messages.units.hours.length - 1)
-                    : this.messages.units.hours,
-            minuteUnit =
-                minutes < 2 && (this.messages.units.pluralS || this.messages.units.minutes.endsWith('s'))
-                    ? this.messages.units.minutes.substr(0, this.messages.units.minutes.length - 1)
-                    : this.messages.units.minutes,
-            secondUnit =
-                seconds < 2 && (this.messages.units.pluralS || this.messages.units.seconds.endsWith('s'))
-                    ? this.messages.units.seconds.substr(0, this.messages.units.seconds.length - 1)
-                    : this.messages.units.seconds;
-        // Generates a first pattern
-        let pattern =
-            (!isDay ? '' : `{days} ${dayUnit}, `) +
-            (!isHour ? '' : `{hours} ${hourUnit}, `) +
-            (!isMinute ? '' : `{minutes} ${minuteUnit}, `) +
-            `{seconds} ${secondUnit}`;
-        // Format the pattern with the right values
-        let content = this.messages.timeRemaining
-            .replace('{duration}', pattern)
-            .replace('{days}', days)
-            .replace('{hours}', hours)
-            .replace('{minutes}', minutes)
-            .replace('{seconds}', seconds);
-        return content;
-    }
+    // Verzend embed en zet de reactie op de popper.
+    var embedSend = await message.channel.send(giveawayEmbed);
+    embedSend.react("🎉");
 
-    /**
-     * Fetches the giveaway message in its channel
-     * @returns {Promise<Message>} The Discord message
-     */
-    async fetchMessage() {
-        return new Promise(async (resolve, reject) => {
-            let message = null;
-            if (this.manager.v12) {
-                message = await this.channel.messages.fetch(this.messageID).catch(() => {});
-            } else {
-                message = await this.channel.fetchMessage(this.messageID).catch(() => {});
+    // Zet een timeout die na het aantal seconden af gaat.
+    setTimeout(function () {
+
+        // Argumenten die we nodig hebben.
+        var random = 0;
+        var winners = [];
+        var inList = false;
+
+        // Verkrijg de gebruikers die gereageerd hebben op de giveaway.
+        var peopleReacted = embedSend.reactions.get("🎉").users.array();
+
+        // Hier gaan we al de mensen over gaan en kijken als de bot er tussen staan
+        // De bot moeten we uit de lijst weghalen en dan gaan we verder.
+        for (var i = 0; i < peopleReacted.length; i++) {
+            if (peopleReacted[i].id == bot.user.id) {
+                peopleReacted.splice(i, 1);
+                continue;
             }
-            if (!message) {
-                return reject('Unable to fetch message with ID ' + this.messageID + '.');
-            }
-            this.message = message;
-            resolve(message);
-        });
-    }
+        }
 
-    /**
-     * Gets the giveaway winner(s)
-     * @param {number} winnerCount The number of winners to pick
-     * @returns {Array<GuildMember>} The winner(s)
-     */
-    async roll(winnerCount) {
-        // Pick the winner
-        let reaction = (this.manager.v12 ? this.message.reactions.cache :  this.message.reactions).find(r => r.emoji.name === this.reaction);
-        if (!reaction) return new Collection();
-        let users = (this.manager.v12 ? await reaction.users.fetch() : await reaction.fetchUsers())
-            .filter(u => u.bot === this.botsCanWin)
-            .filter(u => u.id !== this.message.client.id)
-            .filter(u => this.manager.v12 ? this.channel.guild.members.cache.get(u.id) : this.channel.guild.members.get(u.id))
-            .filter(u => !(this.exemptMembers(this.manager.v12 ? this.channel.guild.members.cache.get(u.id) : this.channel.guild.members.get(u.id))))
-            .filter(u => !this.exemptPermissions.some(p => (this.manager.v12 ? this.channel.guild.members.cache.get(u.id) : this.channel.guild.members.get(u.id)).hasPermission(p)))
-            .random(winnerCount || this.winnerCount)
-            .filter(u => u);
-        return users;
-    }
+        // Hier kijken we na als er wel iemand heeft meegedaan.
+        if (peopleReacted.length == 0) {
+            return message.channel.send("Niemand heeft gewonnen want er deed niemand mee!");
+        }
+
+        // Tijdelijk kijken we na als er te wienig mensen hebben mee gedaan aan de wedstrijd.
+        if (peopleReacted.length < winnerCount) {
+            return message.channel.send("Er zijn te weinig mensen die mee deden daarom heeft de bot gewonnen.");
+        }
+
+        // Voor het aantal winnaars dat we eerder hebben opgegeven gaan we een random nummer aanmaken en de user in een array zetten.
+        for (var i = 0; i < winnerCount; i++) {
+
+            inList = false;
+
+            // Aanmaken van een random getal zodat we een user kunnen kiezen.
+            random = Math.floor(Math.random() * peopleReacted.length);
+
+            // Als een winnaar al voorkomt in de winnaars lijst dan moeten we opnieuw gaan zoeken naar een andere winnaar.
+            for (var y = 0; y < winners.length; y++) {
+                // Nakijken als de geslecteerde winnaar al in de lijst zit.
+                if (winners[y] == peopleReacted[random]) {
+                    // We zetten i 1 minder zodat we opnieuw kunnen doorgaan in de lijst.
+                    i--;
+                    // We zetten dit op true zodat we weten dat deze al in de lijst zit.
+                    inList = true;
+                    break;
+            }
+
+            // Zit deze niet in de lijst gaan we deze toevoegen.
+            if (!inList) {
+                winners.push(peopleReacted[random]);
+
+        }
+
+        // Voor iedere winnaar gaan we een bericht sturen.
+        for (var i = 0; i < winners.length; i++) {
+            message.channel.send("Proficiat " + winners[i] + `! Je hebt gewonnen **${item}**.`);
+        }
+
+    }, 1000 * time);
+
 }
 
-module.exports = Giveaway;
-    name: "giveaway"
+module.exports.help = {
+    name: "giveaway",
+    description: "Start een giveaway"
 }
