@@ -46,9 +46,12 @@ module.exports.run = async (bot, message, args) => {
  
     // Maak embed aan.
     var giveawayEmbed = new discord.RichEmbed()
-        .setTitle("🎉 **GIVEAWAY** 🎉")
-        .setFooter(`Vervalt: ${dateTime}`)
-        .setDescription(item);
+        .setTitle("**GIVEAWAY** 🎉")
+        .addField(`Vervalt:`, dateTime)
+        .setDescription(`**Prijs:** ${item}`)
+        .setColor("#660066");
+        .setTimestamp()
+        .setFooter('MemoriaNetwork | Giveaway', botIcon);
  
     // Verzend embed en zet de reactie op de popper.
     var embedSend = await message.channel.send(giveawayEmbed);
@@ -76,7 +79,7 @@ module.exports.run = async (bot, message, args) => {
  
         // Hier kijken we na als er wel iemand heeft meegedaan.
         if (peopleReacted.length == 0) {
-            return message.channel.send("Niemand heeft gewonnen dus de bot wint.");
+            return message.channel.send("Niemand heeft gewonnen want er deed niemand mee!");
         }
  
         // Tijdelijk kijken we na als er te wienig mensen hebben mee gedaan aan de wedstrijd.
