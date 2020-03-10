@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
             var useMessage = new discord.RichEmbed()
             .setTitle("GEBRUIK GIVEAWAY")
             .setColor("#660066")
-            .setDescription(`Maak een giveaway door gebruik te maken van: \n !giveaway {aantal winners} {tijd} {prijs}`)
+            .setDescription(`Maak een giveaway door gebruik te maken van: \n !gv {aantal winners} {tijd} {prijs}`)
             .setTimestamp()
             .setFooter('MemoriaNetwork', botIcon);
         return message.channel.send(useMessage);
@@ -120,6 +120,6 @@ module.exports.run = async (bot, message, args) => {
 }
  
 module.exports.help = {
-    name: "giveaway",
+    name: "gv",
     description: "Start een giveaway"
 }
