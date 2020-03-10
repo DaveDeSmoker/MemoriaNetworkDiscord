@@ -110,7 +110,7 @@ module.exports.run = async (bot, message, args) => {
  
         // Voor iedere winnaar gaan we een bericht sturen.
         for (var i = 0; i < winners.length; i++) {
-            message.channel.send("Proficiat " + winners[i] + `! Je hebt gewonnen **${item}**.`);
+            message.channel.send("Proficiat " + winners[i] + `! Je hebt gewonnen **${item}** \n Maak binnen 24h een ticket aan in #bots met **!new**`);
         
         }
  
