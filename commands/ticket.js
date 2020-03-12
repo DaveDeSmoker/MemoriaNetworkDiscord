@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args) => {
  
     var embedCreateTicket = new discord.RichEmbed()
         .setTitle("Hi, " + message.author.username)
-        .setDescription("Support kanaal wordt aangemaakt");
+        .setDescription("Support kanaal wordt aangemaakt")
         .setTimestamp()
         .setFooter(`MemoriaNetwork`, botIcon);
     message.channel.send(embedCreateTicket);
