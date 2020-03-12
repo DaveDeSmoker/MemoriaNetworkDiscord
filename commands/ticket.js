@@ -52,9 +52,9 @@ module.exports.run = async (bot, message, args) => {
                 "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
  
             });
- 
+            message.channel.send("@Support helpt je zo snel mogelijk.");
             var embedParent = new discord.RichEmbed()
-                .setTitle("Hoi, " + message.author.username.toString())
+                .setTitle("Hi, " + message.author.username.toString())
                 .setDescription("Dankje voor het openen van een ticket! \nStaff zal je zo snel mogelijk helpen! \nStel je vraag alvast voor een sneller antwoord!")
                 .setTimestamp()
                 .setFooter(`MemoriaNetwork`, botIcon);
