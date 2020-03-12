@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
 
     // Argumenten die we later nodig hebben.
     var item = "";
-    var time;
+    var tijd = DateTime.Now.Date.Add(new TimeSpan(1, 0, 0));;
     var winnerCount;
  
     // Nakijken als je perms hebt om dit command te doen.
