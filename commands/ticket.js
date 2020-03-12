@@ -32,9 +32,10 @@ module.exports.run = async (bot, message, args) => {
     if (bool == true) return;
  
     var embedCreateTicket = new discord.RichEmbed()
-        .setTitle("Hoi, " + message.author.username)
-        .setFooter("Support kanaal wordt aangemaakt");
- 
+        .setTitle("Hi, " + message.author.username)
+        .setDescription("Support kanaal wordt aangemaakt");
+        .setTimestamp()
+        .setFooter(`MemoriaNetwork`, botIcon);
     message.channel.send(embedCreateTicket);
  
     // Maak kanaal en zet in juiste categorie.
@@ -44,6 +45,13 @@ module.exports.run = async (bot, message, args) => {
  
             // Zet perms voor iedereen
             settedParent.overwritePermissions(message.guild.roles.find('name', "@everyone"), { "READ_MESSAGES": false });
+            settedParent.overwritePermissions(message.guild.roles.find('name', "@support"), {
+ 
+                "READ_MESSAGES": true, "SEND_MESSAGES": true,
+                "ATTACH_FILES": true, "CONNECT": true,
+                "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
+ 
+            });
             // Zet perms voor de gebruiker die ticket heeft aangemaakt.
             settedParent.overwritePermissions(message.author, {
  
@@ -52,13 +60,13 @@ module.exports.run = async (bot, message, args) => {
                 "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
  
             });
-            message.channel.send("@Support helpt je zo snel mogelijk.");
             var embedParent = new discord.RichEmbed()
                 .setTitle("Hi, " + message.author.username.toString())
                 .setDescription("Dankje voor het openen van een ticket! \nStaff zal je zo snel mogelijk helpen! \nStel je vraag alvast voor een sneller antwoord!")
                 .setTimestamp()
                 .setFooter(`MemoriaNetwork`, botIcon);
             settedParent.send(embedParent);
+            message.channel.send("@Support helpt je zo snel mogelijk.");
         }).catch(err => {
             message.channel.send("Er is iets fout gelopen.");
         });
