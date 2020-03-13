@@ -10,7 +10,6 @@ module.exports.run = async (bot, message, args) => {
     var userName = message.author.username;
     // Verkrijg discriminator
     var userDiscriminator = message.author.discriminator;
-    var roleID = "670649856343408681";
  
     // Als ticket al gemaakt is
     var bool = false;
@@ -46,14 +45,6 @@ module.exports.run = async (bot, message, args) => {
  
             // Zet perms voor iedereen
             settedParent.overwritePermissions(message.guild.roles.find('name', "@everyone"), { "READ_MESSAGES": false });
-            // Zet perms voor de gebruiker die ticket heeft aangemaakt.
-            settedParent.overwritePermissions(message.guild.roles.find(roleID), {
- 
-                "READ_MESSAGES": true, "SEND_MESSAGES": true,
-                "ATTACH_FILES": true, "CONNECT": true,
-                "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
- 
-            });
             settedParent.overwritePermissions(message.author, {
  
                 "READ_MESSAGES": true, "SEND_MESSAGES": true,
