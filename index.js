@@ -48,16 +48,16 @@ bot.on("guildMemberAdd", member => {
 
     member.addRole(rolle);
 
-    const channel = member.guild.channels.find("name", "welkom");
+    const channel = member.guild.channels.find("name", "welcome");
 
     if (!channel) console.log("Kan kanaal niet vinden");
     var botIcon = bot.user.displayAvatarURL;
     var joinMessage = new discord.RichEmbed()
-        .setTitle(`Welkom ${member.user.tag}`)
+        .setTitle(`Welcome ${member.user.tag}`)
         .setThumbnail(`${member.user.displayAvatarURL}`)
         .setColor("#660066")
-        .setDescription(`**Leuk dat je gejoined bent op de MemoriaNetwork server!** \n \n **IP:** play.memorianetwork.nl  \n **Website:** shop.memorianetwork.nl`)
-        .setFooter('MemoriaNetwork | Doe !help voor meer informatie!', botIcon);
+        .setDescription(`**Thank you for joining the MemoriaNetwork discord server!** \n \n **IP:** play.memorianetwork.nl  \n **Store:** store.memorianetwork.nl`)
+        .setFooter('MemoriaNetwork | Do !help for more information!', botIcon);
 
 
 
@@ -119,16 +119,16 @@ bot.on("message", async message => {
 
         var reason = arguments.join(" ").slice(22);
 
-        if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Je hebt helaas niet de juiste permissie!");
+        if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You dont have permissions for that!");
         
-        if(kickUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Deze gebruiken kan je niet kicken.");
+        if(kickUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You cannot kick this user!");
 
         var kick = new discord.RichEmbed()
             .setDescription("KICK")
             .setColor("#ee0000")
-            .addField("Gekickte gebruiker: ", kickUser)
-            .addField("Gekickt door: ", message.author)
-            .addField("Reden", reason)
+            .addField("Kicked User: ", kickUser)
+            .addField("Kicked by: ", message.author)
+            .addField("Reason", reason)
             .setTimestamp()
             .setFooter('MemoriaNetwork', botIcon);
         
@@ -151,16 +151,16 @@ bot.on("message", async message => {
 
         var reason = arguments.join(" ").slice(22);
 
-        if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Je hebt helaas niet de juiste permissie!");
+        if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("You dont have permissions for that!");
         
-        if(banUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Deze gebruiken kan je niet bannen.");
+        if(banUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You cannot ban this user.");
 
         var ban = new discord.RichEmbed()
             .setDescription("BAN")
             .setColor("#ee0000")
-            .addField("Gebannede gebruiker: ", banUser)
-            .addField("Gebanned door: ", message.author)
-            .addField("Reden", reason)
+            .addField("Banned User: ", banUser)
+            .addField("Banned By: ", message.author)
+            .addField("Reason", reason)
             .setTimestamp()
             .setFooter('MemoriaNetwork', botIcon);
         
