@@ -6,25 +6,15 @@ module.exports.run = async (bot, message, args) => {
     try{
 
         var embedHelp = new discord.RichEmbed()
-        .setTitle("HELP")
+        .setTitle("__**HELP**__")
         .setColor("#660066")
-        .setDescription("Bekijk alle commands van de discord!")
-        .addField("**!help**", "Verkrijg dit command!!")
-        .addField("**!members**", "Bekijk het aantal members in de discord!")
-        .addField("**!ip**", "Bekijk het server ip & de discord link!")
-        .addField("**!regels**", "Bekijk de regels van de minecraft & discord server!")
-        .addField("**!level**", "Bekijk je level & hoeveel xp je nog nodig hebt voor een volgend level!")
-        .addField("**!info**", "Verkrijg info over de discord bot!")
-        .addField("**!idee {idee}**", "Laat een idee achter!")
-        .addField("**!review {cijfer} {review}**", "Laat een review achter!")
-        .addField("**!sps {steen, papier, schaar}**", "Speel steen papier schaar!")
-        .addField("**!new**", "Maak een ticket aan!")
+        .setDescription("\n\n__**INFORMATION!**__\n**!help** | *Get this command*\n**!members** | *View the number of members in the discord*\n**!ip** | *View the server ip & the discord link*\n**!rules** | *View the rules of the minecraft & discord server*\n**!info** | *Get info about the discord bot*\n\n__**FEEDBACK**__\n**!idee {idea}** | *Leave an idea*\n**!review {number} {review}** | *Leave a review*\n\n__**GAMES**__\n**!sps {stone} {paper} {shear}** | *Play rock paper scissors*\n\n__**TICKET**__\n**!new** | *Create a ticket*")
         .setTimestamp()
         .setFooter('MemoriaNetwork', botIcon);
 
         message.author.send(embedHelp);
 
-    message.reply("Bekijk je prive berichten voor de commands!").then(message => message.delete(10000));
+    message.reply("View your private messages for the commands!").then(message => message.delete(10000));
 
     }catch (error) {
         message.channel.send("Er is iets fout gegaan!");
