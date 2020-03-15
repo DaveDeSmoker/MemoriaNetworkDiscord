@@ -2,9 +2,9 @@ const discord = require("discord.js");
 
 module.exports.run = async(bot, message, args) => {
 
-    if (!message.member.hasPermissions("MANAGE_MESSAGES")) return message.reply("Je hebt helaas niet de juiste permissie!");
+    if (!message.member.hasPermissions("MANAGE_MESSAGES")) return message.reply("You dont have the permission for that!");
 
-    if (!args[0]) return message.reply("Geef een aantal op.");
+    if (!args[0]) return message.reply("Enter a number.");
 
     if(Number.isInteger(parseInt(args[0]))){
 
@@ -12,11 +12,11 @@ module.exports.run = async(bot, message, args) => {
 
         message.channel.bulkDelete(amount).then(() => { });
 
-            message.reply(`heeft ${args[0]} berichten verwijderd!`).then(message => message.delete(10000));
+            message.reply(`deleted ${args[0]} messages!`).then(message => message.delete(10000));
 
 
     }else {
-        return message.reply("Geef een aantal op.");
+        return message.reply("Enter a number.");
     }
 
 
