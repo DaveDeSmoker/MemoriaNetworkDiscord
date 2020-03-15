@@ -8,10 +8,12 @@ module.exports.run = async(bot, message, args) => {
         .setTitle("DISCORD BOT INFO")
         .setColor("#660066")
         .setThumbnail(botIcon)
-        .addField("Bot naam", bot.user.username)
-        .addField("Gemaakt op", bot.user.createdAt)
-        .addField("Gemaakt door", "@DaveDeSmoker#4271")
-        .addField("Meer info?", "!help")
+        .addField("Bot name", bot.user.username)
+        .addField("Server IP", "play.memorianetwork.nl")
+        .addField("Store", "store.memorianetwork.nl")
+        .addField("Created on", bot.user.createdAt)
+        .addField("Created by", "@DaveDeSmoker#4271")
+        .addField("Need more info?", "!help")
         .setTimestamp()
         .setFooter('MemoriaNetwork', botIcon);
 
