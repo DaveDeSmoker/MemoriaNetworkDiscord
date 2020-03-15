@@ -6,14 +6,14 @@ module.exports.run = async (bot, message, args) => {
     var idee = args.join(" ");
  
     // Kijk na als er een idee is meegegeven.
-    if (!idee) return message.channel.send("Je hebt geen idee meegegeven!");
+    if (!idee) return message.channel.send("You have not given an idea!");
  
     // Maak het embed aan.
     var ideeEmbed = new discord.RichEmbed()
-        .setTitle("Server Idee")
+        .setTitle("Server Idea")
         .setColor("#660066")
-        .addField("Ingezonden door: ", message.author)
-        .addField("Idee: ", idee);
+        .addField("Submitted by: ", message.author)
+        .addField("Idea: ", idee);
  
     // Vind het kanaal.
     var ideeChannel = message.guild.channels.find(`name`, "server-feedback");
