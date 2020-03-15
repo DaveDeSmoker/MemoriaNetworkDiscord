@@ -3,12 +3,12 @@ const discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
 
     var botIcon = bot.user.displayAvatarURL;
-    if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("Je hebt helaas niet de juiste permissie!");
+    if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("You dont have the permission for that!");
     if(args[0] == null) {
             var useMessage = new discord.RichEmbed()
-            .setTitle("GEBRUIK GIVEAWAY")
+            .setTitle("USE GIVEAWAY")
             .setColor("#660066")
-            .setDescription(`Maak een giveaway door gebruik te maken van: \n !gv {aantal winners} {tijd} {prijs}`)
+            .setDescription(`Create a giveaway using: \n !gv {number of winners} {time} {price}`)
             .setTimestamp()
             .setFooter('MemoriaNetwork', botIcon);
         return message.channel.send(useMessage);
@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
     var winnerCount;
  
     // Nakijken als je perms hebt om dit command te doen.
-    if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Sorry jij kan dit niet doen");
+    if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You dont have the permission for that!");
  
     // !giveaway aantalWinnaars seconden itemOmTeWinnen.
  
@@ -42,7 +42,7 @@ module.exports.run = async (bot, message, args) => {
     // Maak embed aan.
     var giveawayEmbed = new discord.RichEmbed()
         .setTitle("**GIVEAWAY** 🎉")
-        .setDescription(`**Prijs:** ${item} \n **Vervalt:** ${dateTime}`)
+        .setDescription(`**Price:** ${item} \n **Expires:** ${dateTime}`)
         .setColor("#660066")
         .setTimestamp()
         .setFooter('MemoriaNetwork | Giveaway', botIcon);
@@ -73,12 +73,12 @@ module.exports.run = async (bot, message, args) => {
  
         // Hier kijken we na als er wel iemand heeft meegedaan.
         if (peopleReacted.length == 0) {
-            return message.channel.send("Niemand heeft gewonnen dus de bot wint.");
+            return message.channel.send("Nobody wins.");
         }
  
         // Tijdelijk kijken we na als er te wienig mensen hebben mee gedaan aan de wedstrijd.
         if (peopleReacted.length < winnerCount) {
-            return message.channel.send("Er zijn te weinig mensen die mee deden daarom heeft de bot gewonnen.");
+            return message.channel.send("Nobody wins.");
         }
  
         // Voor het aantal winnaars dat we eerder hebben opgegeven gaan we een random nummer aanmaken en de user in een array zetten.
@@ -110,7 +110,7 @@ module.exports.run = async (bot, message, args) => {
  
         // Voor iedere winnaar gaan we een bericht sturen.
         for (var i = 0; i < winners.length; i++) {
-            message.channel.send("Proficiat " + winners[i] + `! Je hebt gewonnen **${item}** \n Maak binnen 24h een ticket aan in #bots met **!new**`);
+            message.channel.send("Congrats " + winners[i] + `! You won **${item}** \n Create a ticket in #bots with **!new**`);
         
         }
  
