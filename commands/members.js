@@ -9,7 +9,7 @@ module.exports.run = async(bot, message, args) => {
         .setTitle("SERVER INFO")
         .setColor("#660066")
         .setThumbnail(icon)
-        .addField("Totaal aantal members", message.guild.memberCount)
+        .setDescription(`**Members**\n ${message.guild.memberCount}`)
         .setTimestamp()
         .setFooter('MemoriaNetwork', botIcon);
 
