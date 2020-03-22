@@ -53,7 +53,8 @@ module.exports.run = async (bot, message, args) => {
  
             },
             )
-            settedParent.overwritePermissions(message.guild.roles.find('name', "@Support"),
+            settedParent.overwritePermissions(message.guild.roles.find(
+                Support,
                         {
                             "READ_MESSAGES": true,
                             "SEND_MESSAGES": true,
