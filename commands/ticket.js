@@ -51,7 +51,8 @@ module.exports.run = async (bot, message, args) => {
                 "ATTACH_FILES": true, "CONNECT": true,
                 "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
  
-            });
+            },
+            )
             settedParent.overwritePermissions(
                         Support,
                         {
@@ -62,8 +63,6 @@ module.exports.run = async (bot, message, args) => {
                             "READ_MESSAGE_HISTORY": true,
                             "EMBED_LINKS": true,
                             "USE_EXTERNAL_EMOJIS": true
-                        },
-                    )
                 });
             var embedParent = new discord.RichEmbed()
                 .setTitle("Hi, " + message.author.username.toString())
