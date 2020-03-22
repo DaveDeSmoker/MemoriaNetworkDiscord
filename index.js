@@ -174,7 +174,104 @@ bot.on("message", async message => {
         return;
 
     }
-    
+
+        //get args
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    //get cmd
+    const cmd = args.shift().toLocaleLowerCase();
+    //CHECK IF MESSAGE IS SENT IN THE TICKET CHANNEL
+    if (message.channel.id === config.ticketChanId) {
+        //CHECK IF COMMAND IS "-ticket"
+        if (command === `${prefix}ticket`) {
+            console.log('TICKET CREATED BY: ' + message.author.username);
+            message.guild.createChannel("ticket-" + message.author.username, "text").then((chan) => {
+                chan.setParent(config.catId).then(() => {
+                    let roles = message.guild.roles; // collection
+
+                    // find specific role - enter name of a role you create here
+                    //Staff is uppercase sensitive
+                    let staff = roles.find('name', config.roleName);
+                    //Only readable for the ticket requester
+                    chan.overwritePermissions(message.guild.roles.find("name", "@everyone"), { "READ_MESSAGES": false, "READ_MESSAGE_HISTORY": false })
+                    chan.overwritePermissions(message.author, {
+                        "READ_MESSAGES": true,
+                        "SEND_MESSAGES": true,
+                        "ATTACH_FILES": true,
+                        "CREATE_INSTANT_INVITE": false,
+                        "ADD_REACTIONS": true,
+                        "READ_MESSAGE_HISTORY": true,
+                        "EMBED_LINKS": true,
+                        "USE_EXTERNAL_EMOJIS": true
+                    });
+                    //OVERWRITE FOR STAFF
+                    chan.overwritePermissions(
+                        Support,
+                        {
+                            "READ_MESSAGES": true,
+                            "SEND_MESSAGES": true,
+                            "ATTACH_FILES": true,
+                            "ADD_REACTIONS": true,
+                            "READ_MESSAGE_HISTORY": true,
+                            "EMBED_LINKS": true,
+                            "USE_EXTERNAL_EMOJIS": true
+                        },
+                    )
+                });
+                //Make the embed
+                const embed = {
+                    "color": 0xD080B2,
+                    "footer": {
+                        "icon_url": message.guild.iconURL,
+                        "text": message.guild.name + " ticket system"
+                    },
+                    "author": {
+                        "name": message.guild.name,
+                        "icon_url": message.guild.iconURL
+                    },
+                    "fields": [
+                        {
+                            "name": "Hey there " + message.author.username + "!",
+                            "value": "Help will arrive soon!"
+                        },
+                        {
+                            "name": "To close this ticket, use the command below.",
+                            "value": "`-close`"
+                        }
+                    ]
+                };
+                //send the embed and tag the author
+                chan.send("<@" + message.author.id + ">", { embed });
+
+            });
+        }
+        else {
+            //DELETE MESSAGE IF IT ISN'T THE "TICKET" CMD
+            message.delete();
+            message.author.send('a');
+        }
+    }
+
+    if (message.channel.parentID === config.catId) {
+        //CLOSE TICKET
+        if (command === `${prefix}close`) {
+
+            message.channel.send("Are you sure you want to close the ticket? (Y/N)");
+            //OPEN A MESSAGE COLLECTOR FOR X seconds (set at 10000 now (10s))
+            const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+            collector.on('collect', message => {
+                if (message.content == "Y") {
+
+                    message.channel.delete();
+
+                } else if (message.content == "N") {
+
+                    message.channel.send("Ticket didn't close.");
+
+                    collector.stop();
+                }
+
+            });
+
 });
 
 
