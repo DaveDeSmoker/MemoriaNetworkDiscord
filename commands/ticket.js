@@ -52,6 +52,19 @@ module.exports.run = async (bot, message, args) => {
                 "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
  
             });
+         chan.overwritePermissions(
+                        Support,
+                        {
+                            "READ_MESSAGES": true,
+                            "SEND_MESSAGES": true,
+                            "ATTACH_FILES": true,
+                            "ADD_REACTIONS": true,
+                            "READ_MESSAGE_HISTORY": true,
+                            "EMBED_LINKS": true,
+                            "USE_EXTERNAL_EMOJIS": true
+                        },
+                    )
+                });
             var embedParent = new discord.RichEmbed()
                 .setTitle("Hi, " + message.author.username.toString())
                 .setDescription("Dankje voor het openen van een ticket! \nStaff zal je zo snel mogelijk helpen! \nStel je vraag alvast voor een sneller antwoord!")
