@@ -268,9 +268,14 @@ bot.on("message", async message => {
                     message.channel.send("Ticket didn't close.");
 
                     collector.stop();
-                }
+                                }
 
             });
+        }
+    }
+
+
+});
 
 
 
