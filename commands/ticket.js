@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
                 "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
  
             });
-         chan.overwritePermissions(
+            settedParent.overwritePermissions(
                         Support,
                         {
                             "READ_MESSAGES": true,
