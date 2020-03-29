@@ -36,32 +36,12 @@ bot.on("ready", async () => {
 });
 
 bot.on("guildMemberAdd", member => {
-    var role = member.guild.roles.find("name", "[▬▬▬▬▬▌Member▐▬▬▬▬▬]");
+    var role = member.guild.roles.find("name", "New");
 
     if (!role) return;
 
     member.addRole(role);
 
-    var rolle = member.guild.roles.find("name", "Member");
-
-    if (!rolle) return;
-
-    member.addRole(rolle);
-
-    const channel = member.guild.channels.find("name", "welcome");
-
-    if (!channel) console.log("Kan kanaal niet vinden");
-    var botIcon = bot.user.displayAvatarURL;
-    var joinMessage = new discord.RichEmbed()
-        .setTitle(`Welcome ${member.user.tag}`)
-        .setThumbnail(`${member.user.displayAvatarURL}`)
-        .setColor("#660066")
-        .setDescription(`**Thank you for joining the MemoriaNetwork discord server!** \n \n **IP:** play.memorianetwork.nl  \n **Store:** store.memorianetwork.nl`)
-        .setFooter('MemoriaNetwork | Do !help for more information!', botIcon);
-
-
-
-    channel.send(joinMessage);
 });
 
 // bot.on("guildMemberAdd"), member => {
