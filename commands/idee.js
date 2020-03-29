@@ -6,17 +6,17 @@ module.exports.run = async (bot, message, args) => {
     var idee = args.join(" ");
  
     // Kijk na als er een idee is meegegeven.
-    if (!idee) return message.channel.send("You have not given an idea!");
+    if (!idee) return message.channel.send("You have not given a suggestion!");
  
     // Maak het embed aan.
     var ideeEmbed = new discord.RichEmbed()
-        .setTitle("Server Idea")
+        .setTitle("Suggestion")
         .setColor("#660066")
         .addField("Submitted by: ", message.author)
-        .addField("Idea: ", idee);
+        .addField("Message: ", idee);
  
     // Vind het kanaal.
-    var ideeChannel = message.guild.channels.find(`name`, "server-feedback");
+    var ideeChannel = message.guild.channels.find(`name`, "suggestion");
     if (!ideeChannel) return message.guild.send("Kan het kanaal niet vinden");
  
     // Verzend het bericht en voeg er reacties aan toe.
@@ -30,6 +30,6 @@ module.exports.run = async (bot, message, args) => {
 }
  
 module.exports.help = {
-    name: "idee",
+    name: "suggestion",
     description: "Heb je een idee. Zet het dan hier en misschien passen we het toe."
 }
