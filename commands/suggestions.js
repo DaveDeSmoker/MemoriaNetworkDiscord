@@ -3,7 +3,7 @@ const discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
  
     // Vang het idee op.
-    var idee = args.join(" ");
+    var idee = args.join(" ").then(msg => msg.delete(5000));
  
     // Kijk na als er een idee is meegegeven.
     if (!idee) return message.channel.send("You have not given a suggestion!");
