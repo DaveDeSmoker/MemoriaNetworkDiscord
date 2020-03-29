@@ -12,12 +12,12 @@ module.exports.run = async (bot, message, args) => {
     var ideeEmbed = new discord.RichEmbed()
         .setTitle("Suggestie")
         .setColor("#660066")
-        .addField("Submitted by: ", message.author)
+        .addField("Ingestuurd door: ", message.author)
         .addField("Bericht: ", idee);
  
     // Vind het kanaal.
     var ideeChannel = message.guild.channels.find(`name`, "suggesties");
-    if (!ideeChannel) return message.guild.send("Kan het kanaal niet vinden");
+    if (!ideeChannel) return message.guild.send("Kan het kanaal **suggesties** niet vinden");
  
     // Verzend het bericht en voeg er reacties aan toe.
     ideeChannel.send(ideeEmbed).then(embedMessage => {
