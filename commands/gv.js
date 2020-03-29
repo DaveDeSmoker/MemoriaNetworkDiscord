@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
         .setDescription(`**Price:** ${item} \n **Expires:** ${dateTime}`)
         .setColor("#660066")
         .setTimestamp()
-        .setFooter('MemoriaNetwork | Giveaway', botIcon);
+        .setFooter('MemoriaNetwork | Giveaway', dateTime);
 
     // Verzend embed en zet de reactie op de popper.
     var embedSend = await message.channel.send(giveawayEmbed);
